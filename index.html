@@ -109,19 +109,6 @@ nav.top.hide { transform: translateY(-100%); }
   border-left: 1px solid var(--line); padding-left: 14px;
   line-height: 1.3;
 }
-.nav-pdf {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: var(--ink); color: #fff;
-  padding: 10px 20px; border-radius: 100px;
-  font-size: 13px; font-weight: 600;
-  text-decoration: none;
-  box-shadow: var(--elev-2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-.nav-pdf:hover { transform: translateY(-2px); box-shadow: var(--elev-3); }
-.nav-pdf::before {
-  content: '↓'; font-size: 14px; font-weight: 700;
-}
 
 /* HERO */
 .hero {
@@ -419,6 +406,205 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 }
 .tier p { color: var(--charcoal); font-size: 13px; line-height: 1.55; position: relative; z-index: 1; font-weight: 500; }
 
+/* TIER — PREVIEW + BUTTON */
+.tier-preview {
+  margin-top: 18px; padding-top: 16px;
+  border-top: 1px solid rgba(0,0,0,0.10);
+  position: relative; z-index: 1;
+}
+.tier-preview-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 10px;
+}
+.tier-preview-list {
+  list-style: none; padding: 0; margin: 0 0 14px 0;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.tier-preview-list li {
+  font-size: 12px; line-height: 1.4; color: var(--charcoal);
+  font-weight: 500;
+  display: flex; gap: 6px; align-items: baseline;
+  white-space: nowrap; overflow: hidden;
+}
+.tier-preview-list li .dot {
+  flex: 0 0 4px; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--muted);
+  transform: translateY(-2px);
+}
+.tier .tier-preview-list li .dot { background: var(--green); }
+.tier.t-2 .tier-preview-list li .dot { background: var(--amber); }
+.tier.t-3 .tier-preview-list li .dot { background: var(--blue); }
+.tier.t-4 .tier-preview-list li .dot { background: var(--red); }
+.tier-preview-list li .name {
+  flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis;
+}
+.tier-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: var(--ink);
+  padding: 8px 14px; border-radius: 100px;
+  font-family: 'Raleway'; font-weight: 700; font-size: 11.5px;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+}
+.tier-btn:hover {
+  background: var(--ink); color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.18);
+}
+.tier-btn-arrow { transition: transform 0.3s ease; }
+.tier-btn:hover .tier-btn-arrow { transform: translateX(3px); }
+
+/* SKU MODAL */
+.sku-modal {
+  position: fixed; inset: 0; z-index: 200;
+  display: none;
+  background: rgba(10,10,10,0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  align-items: center; justify-content: center;
+  padding: 24px;
+}
+.sku-modal.open {
+  display: flex;
+  animation: modalFadeIn 0.25s ease;
+}
+@keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+.sku-modal-card {
+  background: var(--paper-soft);
+  border-radius: 24px;
+  width: 100%; max-width: 780px;
+  max-height: 86vh;
+  display: flex; flex-direction: column;
+  box-shadow: var(--elev-4);
+  overflow: hidden;
+  animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+@keyframes modalSlideIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.sku-modal-head {
+  padding: 28px 60px 20px 28px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.5), transparent);
+}
+.sku-modal-rate {
+  font-family: 'Unbounded'; font-weight: 900;
+  font-size: 38px; line-height: 0.95;
+  color: var(--green);
+  letter-spacing: -0.04em;
+  margin-bottom: 6px;
+}
+.sku-modal-card.t-2 .sku-modal-rate { color: var(--amber); }
+.sku-modal-card.t-3 .sku-modal-rate { color: var(--blue); }
+.sku-modal-card.t-4 .sku-modal-rate { color: var(--red); }
+.sku-modal-title {
+  font-family: 'Unbounded'; font-weight: 700; font-size: 17px;
+  color: var(--ink); margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.sku-modal-sub {
+  font-size: 12.5px; color: var(--muted); font-weight: 500; line-height: 1.5;
+}
+.sku-modal-close {
+  position: absolute; top: 22px; right: 22px;
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(0,0,0,0.06); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; color: var(--ink);
+}
+.sku-modal-close:hover { background: var(--ink); color: #fff; transform: rotate(90deg); }
+
+.sku-modal-list {
+  flex: 1; overflow-y: auto;
+  padding: 4px 12px 8px;
+}
+.sku-modal-list::-webkit-scrollbar { width: 8px; }
+.sku-modal-list::-webkit-scrollbar-track { background: transparent; }
+.sku-modal-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 8px; }
+.sku-modal-list::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
+.sku-row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 14px; align-items: baseline;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: background 0.15s;
+}
+.sku-row:hover { background: rgba(0,0,0,0.04); }
+.sku-row + .sku-row { border-top: 1px solid rgba(0,0,0,0.05); }
+.sku-rank {
+  font-family: 'Unbounded'; font-weight: 700;
+  font-size: 11px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+.sku-art {
+  font-family: 'Raleway'; font-weight: 600;
+  font-size: 10.5px; color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px; letter-spacing: 0.02em;
+}
+.sku-name {
+  font-size: 13px; color: var(--ink); font-weight: 500;
+  line-height: 1.4;
+}
+.sku-cat {
+  font-size: 10.5px; color: var(--muted); font-weight: 600;
+  margin-top: 4px;
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.sku-aside {
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.sku-stat { text-align: right; min-width: 44px; }
+.sku-stat-val {
+  font-family: 'Unbounded'; font-weight: 700; font-size: 14px;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  white-space: nowrap;
+}
+.sku-stat-lbl {
+  font-family: 'Raleway'; font-weight: 700; font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-top: 5px; line-height: 1.2;
+  white-space: nowrap;
+}
+.sku-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 800;
+  padding: 2px 7px; border-radius: 100px;
+  margin-right: 6px;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  vertical-align: 2px;
+}
+.sku-badge.our { background: var(--green); color: #fff; }
+.sku-badge.ta { background: var(--blue); color: #fff; }
+
+body.modal-open { overflow: hidden; }
+@media (max-width: 600px) {
+  .sku-modal { padding: 12px; }
+  .sku-modal-card { max-height: 92vh; border-radius: 20px; }
+  .sku-modal-head { padding: 22px 56px 16px 20px; }
+  .sku-modal-rate { font-size: 32px; }
+  .sku-row { grid-template-columns: 36px 1fr auto; gap: 10px; padding: 12px 14px; }
+  .sku-rank { font-size: 10px; }
+  .sku-name { font-size: 12.5px; }
+  .sku-aside { gap: 12px; }
+  .sku-stat-val { font-size: 12.5px; }
+  .sku-stat-lbl { font-size: 8.5px; }
+}
+
 /* CLIENT EXAMPLE */
 .client-cards {
   display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
@@ -553,34 +739,8 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 .disclaimer b { font-weight: 700; color: #fff; }
 
 /* PDF CTA */
-.pdf-cta {
-  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,247,238,0.7) 100%);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(255,255,255,0.8);
-  border-radius: 24px;
-  padding: 56px 48px;
-  box-shadow: var(--liquid-glass);
-  display: grid; grid-template-columns: 1fr auto; gap: 40px;
-  align-items: center;
-  position: relative; overflow: hidden;
-}
-@media (max-width: 720px) { .pdf-cta { grid-template-columns: 1fr; padding: 36px 28px; } }
-.pdf-cta::before {
-  content: ''; position: absolute;
-  right: -100px; top: -100px;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(209,0,36,0.08) 0%, transparent 70%);
-  border-radius: 50%;
-  pointer-events: none;
-}
-.pdf-cta-text h3 {
-  font-family: 'Unbounded'; font-weight: 700;
-  font-size: clamp(24px, 2.6vw, 32px);
-  margin-bottom: 12px; color: var(--ink);
-  letter-spacing: -0.02em; line-height: 1.2;
-}
-.pdf-cta-text p { font-size: 15px; color: var(--charcoal); line-height: 1.55; font-weight: 500; }
+
+@media (max-width: 720px) {  }
 
 footer {
   padding: 64px 0;
@@ -629,7 +789,6 @@ footer .logo { justify-content: center; margin-bottom: 20px; }
 </svg></span>
       <span class="logo-text">Підвищене<br>списання</span>
     </a>
-    <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="nav-pdf" target="_blank">PDF зі списком</a>
   </div>
 </nav>
 
@@ -651,7 +810,7 @@ footer .logo { justify-content: center; margin-bottom: 20px; }
     <h1>Список товарів з <span class="accent">підвищеним списанням</span></h1>
     <p class="lede">Як ми обрали 346 нових товарів для розширеної програми списання бонусів і чого від цього очікувати.</p>
     <div class="hero-actions">
-      <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="btn btn-primary" target="_blank">Завантажити PDF зі списком</a>
+      <a href="#tiers" class="btn btn-primary">Дивитись товари</a>
       <a href="#methodology" class="btn btn-secondary">Як це працює</a>
     </div>
   </div>
@@ -703,24 +862,52 @@ footer .logo { justify-content: center; margin-bottom: 20px; }
         <div class="tier-count">147 нових товарів</div>
         <h3>Повністю за бонуси</h3>
         <p>СТМ і високомаржинальні товари. 34 SKU — наш список, 113 SKU — від комерції. Окремо діє існуючий список SUNLIFE з 50 позицій.</p>
+        <div class="tier-preview">
+          <div class="tier-preview-label">Топ-3 SKU</div>
+          <ul class="tier-preview-list" data-preview="t100"></ul>
+          <button class="tier-btn" data-modal="t100">
+            Усі 147 товарів <span class="tier-btn-arrow">→</span>
+          </button>
+        </div>
       </div>
       <div class="tier t-2 reveal">
         <div class="tier-rate">30%</div>
         <div class="tier-count">92 товари</div>
         <h3>Третина ціни</h3>
         <p>Помітна знижка на ходові препарати. Стандартно тут списується ~5%, ми піднімаємо до 30% — щоб клієнт відчув реальну вигоду.</p>
+        <div class="tier-preview">
+          <div class="tier-preview-label">Топ-3 SKU</div>
+          <ul class="tier-preview-list" data-preview="t30"></ul>
+          <button class="tier-btn" data-modal="t30">
+            Усі 92 товари <span class="tier-btn-arrow">→</span>
+          </button>
+        </div>
       </div>
       <div class="tier t-3 reveal">
         <div class="tier-rate">15%</div>
         <div class="tier-count">83 товари</div>
         <h3>Помірна знижка</h3>
         <p>Товари з повною доходністю понад 30%, але стандартним списанням нижче 10%. Запасу маржі вистачає на +15%, але не на 30%.</p>
+        <div class="tier-preview">
+          <div class="tier-preview-label">Топ-3 SKU</div>
+          <ul class="tier-preview-list" data-preview="t15"></ul>
+          <button class="tier-btn" data-modal="t15">
+            Усі 83 товари <span class="tier-btn-arrow">→</span>
+          </button>
+        </div>
       </div>
       <div class="tier t-4 reveal">
         <div class="tier-rate">+10%</div>
         <div class="tier-count">24 товари</div>
         <h3>Більше нарахування</h3>
         <p>Замість стандартних 5% нарахування — 10%. Це товари СТМ з нерегулярними продажами та значним залишком на складі.</p>
+        <div class="tier-preview">
+          <div class="tier-preview-label">Топ-3 SKU</div>
+          <ul class="tier-preview-list" data-preview="tacc"></ul>
+          <button class="tier-btn" data-modal="tacc">
+            Усі 24 товари <span class="tier-btn-arrow">→</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -795,22 +982,20 @@ footer .logo { justify-content: center; margin-bottom: 20px; }
   </div>
 </section>
 
-<section id="download" class="cream">
-  <div class="section-number">04</div>
-  <div class="container">
-    <span class="eyebrow reveal">Повний список</span>
-    <h2 class="reveal tight">Усі 234 SKU в одному PDF</h2>
-    <p class="section-lede reveal">Повний перелік товарів зі списку команди ПЛ — з артикулами, цінами, маржею, залишками й оборотністю — оформлений для зручного перегляду.</p>
-
-    <div class="pdf-cta reveal">
-      <div class="pdf-cta-text">
-        <h3>Список товарів з підвищеним списанням</h3>
-        <p>PDF, 6 сторінок: 100% (34 SKU) · 30% (92 SKU) · 15% (83 SKU) · +10% нарахування (24 SKU). Кожен SKU з артикулом, повною економікою й залишком.</p>
-      </div>
-      <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="btn btn-primary" target="_blank">Завантажити PDF</a>
+<!-- SKU MODAL -->
+<div class="sku-modal" id="skuModal" role="dialog" aria-modal="true" aria-labelledby="skuModalTitle">
+  <div class="sku-modal-card" id="skuModalCard">
+    <div class="sku-modal-head">
+      <div class="sku-modal-rate" id="skuModalRate">100%</div>
+      <div class="sku-modal-title" id="skuModalTitle">Повністю за бонуси</div>
+      <div class="sku-modal-sub" id="skuModalSub">147 товарів</div>
+      <button class="sku-modal-close" id="skuModalClose" aria-label="Закрити">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
     </div>
+    <div class="sku-modal-list" id="skuModalList"></div>
   </div>
-</section>
+</div>
 
 <footer>
   <a href="#top" class="logo">
@@ -897,6 +1082,110 @@ const counterIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 counters.forEach(el => counterIO.observe(el));
+
+/* SKU LISTS */
+const SKU_DATA = {"t100":[{"a":"748473","n":"Успокоительное табл. №10(2) Семейная аптечка","c":"СЕМЕЙНАЯ АПТЕЧКА (СТМ)","pr":0.357946666666667,"tr":74,"s":"Наша"},{"a":"763798","n":"Диосмин табл. п/о 500мг №15(4) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":333,"s":"Tier A"},{"a":"750863","n":"Сенадексин табл. №10(20)","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":368,"s":"Tier A"},{"a":"663557","n":"Шприц 10 мл 3-комп. 2 иглы 23G и 21G Швидка допомога","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":207,"s":"Tier A"},{"a":"45874","n":"Уголь активированный табл. 250мг №10 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.310666666666667,"tr":64,"s":"Наша"},{"a":"757502","n":"Парахелп Шампунь противопедикул. (от вшей и гнид) фл. 100мл Solution pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":354,"s":"Tier A"},{"a":"159847","n":"Шприц 2 мл 3-комп. с игл. 23G (0.6x30мм) Alexpharm ","c":"ALEXPHARM","pr":0.22732,"tr":123,"s":"Наша"},{"a":"756779","n":"Муколитик Форте табл. конт. №30 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":286,"s":"Tier A"},{"a":"757503","n":"Парахелп Спрей противопедикул. (от вшей и гнид) фл. 100мл Solution pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":257,"s":"Tier A"},{"a":"558059","n":"Пантенол спрей-пена Geling 150мл","c":"Лечебно-косметические средства","pr":0.4,"tr":1145,"s":"Tier A"},{"a":"768599","n":"Фуранитрил табл. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":219,"s":"Tier A"},{"a":"862651","n":"Флексгард капл. №8(6) Solution Pharm","c":"","pr":0.4,"tr":1190,"s":"Tier A"},{"a":"841298","n":"Формула сновидений табл. №10(2) Семейная аптечка","c":"СЕМЕЙНАЯ АПТЕЧКА (СТМ)","pr":0.3408,"tr":99999,"s":"Наша"},{"a":"569923","n":"Витамин D3 2000МE со вкусом мяты и лимона табл. №30 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.301717391304348,"tr":34,"s":"Наша"},{"a":"603567","n":"Алко Велл капс. №10 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":217,"s":"Tier A"},{"a":"224852","n":"Уголь активированный настоящий табл. 250мг №10 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.19744,"tr":234,"s":"Наша"},{"a":"841296","n":"Формула легкости табл. №10(2) Семейная аптечка","c":"Витамины и БАДы","pr":0.4,"tr":640,"s":"Tier A"},{"a":"744540","n":"Валериана макси табл. п/о 30мг №25 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":360,"s":"Tier A"},{"a":"798836","n":"Синумакс Силвер спрей д/носа фл. 15мл Solution Pharm ИМН","c":"Товары для здоровья","pr":0.4,"tr":205,"s":"Tier A"},{"a":"757165","n":"Анти Токсин+ пор. 2г саше №1(20)","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":990,"s":"Tier A"},{"a":"513929","n":"Силицеа Гель д/желудочно-кишечной с-мы саше 15мл №1(30)","c":"SILICEA (СТМ)","pr":0.395848888888889,"tr":243,"s":"Наша"},{"a":"682981","n":"Глицериновые супп. ректал. 1600мг №5(2) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.35645981688708,"tr":78,"s":"Наша"},{"a":"670585","n":"NatHealth Магний+В-комплекс табл. шип. №20","c":"Витамины и БАДы","pr":0.4,"tr":369,"s":"Tier A"},{"a":"807043","n":"Синумакс Фито спрей назал. фл. 25мл Solution Pharm ИМН","c":"Товары для здоровья","pr":0.4,"tr":251,"s":"Tier A"},{"a":"320365","n":"Ангиотон гель туба 50мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.1874,"tr":99,"s":"Наша"},{"a":"175539","n":"Кетодин супп. вагинал. 400мг №5(2)","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":421,"s":"Tier A"},{"a":"725555","n":"Ислор сироп исланд. моха фл. 200мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.282,"tr":99999,"s":"Наша"},{"a":"648034","n":"Магний+В6 табл. №10(5) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.382955371900827,"tr":69,"s":"Наша"},{"a":"813865","n":"CORBAKTOL Neutral Антиперспирант антибакт. Deo-Spray Aktiv 75мл","c":"Лечебно-косметические средства","pr":0.4,"tr":593,"s":"Tier A"},{"a":"758988","n":"Глицин Форте табл. д/рассас. №10(4) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":261,"s":"Tier A"},{"a":"773720","n":"GREENWICH Игрушка Кукла 3,5 дюйма в ассорт. VA182926","c":"Товары для детей и мам","pr":0.4,"tr":1322,"s":"Tier A"},{"a":"731536","n":"Гиалуроновая кислота капс. №10(3) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":307,"s":"Tier A"},{"a":"703783","n":"Таблетки от изжоги со вкусом малины №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":239,"s":"Tier A"},{"a":"516963","n":"Стресс-офф капс. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":351,"s":"Tier A"},{"a":"748552","n":"Проносное табл. №10(2) Семейная аптечка","c":"СЕМЕЙНАЯ АПТЕЧКА (СТМ)","pr":0.348453333333333,"tr":64,"s":"Наша"},{"a":"830232","n":"СмекАктив пор. орал. саше 3,26г №1(30) Solution Pharm (10.26)","c":"","pr":0.4,"tr":456,"s":"Tier A"},{"a":"594461","n":"Витамин D3 5000МЕ Форте со вкусом малины табл. №30 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":689,"s":"Tier A"},{"a":"159848","n":"Шприц 5 мл 3-комп. с игл. 22G (0.7x40мм) Alexpharm ","c":"ALEXPHARM","pr":0.238,"tr":48,"s":"Наша"},{"a":"769173","n":"Витаргинин Афте Пати р-р д/орал. прим. фл. 60мл Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":315,"s":"Tier A"},{"a":"678215","n":"Дилатил Дуо супп. ректал. №7 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.242650154798762,"tr":144,"s":"Наша"},{"a":"487694","n":"Муколитик Форте табл. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":247,"s":"Tier A"},{"a":"773010","n":"GREENWICH Игрушка Конструктор VA125314","c":"Товары для детей и мам","pr":0.4,"tr":218,"s":"Tier A"},{"a":"813856","n":"Витамин D3 4000МЕ капс. №10(3) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.368301587301587,"tr":232,"s":"Наша"},{"a":"463501","n":"Гель на основе пчелиного яда 50мл Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":215,"s":"Tier A"},{"a":"159850","n":"Шприц 20 мл 3-комп. с игл. 21G (0.8x40мм) Alexpharm ","c":"ALEXPHARM","pr":0.19704,"tr":556,"s":"Наша"},{"a":"592995","n":"Витамин С+Zn табл. жев. персик №30 Solution Pharm ","c":"Витамины и БАДы","pr":0.4,"tr":384,"s":"Tier A"},{"a":"526537","n":"Гепато Фарм фиточай фильтр-пак. 1,5г №20 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.243317073170732,"tr":99999,"s":"Наша"},{"a":"657805","n":"DOLPHI Sensual Touch Лубрикант чувствительный 50мл","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":377,"s":"Tier A"},{"a":"599214","n":"Муколитик Форте табл. №30 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":353,"s":"Tier A"},{"a":"732951","n":"Спирт этиловый 96% р-р д/наруж. прим. 96% фл. 100мл Айви","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":354,"s":"Tier A"},{"a":"703782","n":"Таблетки от изжоги со вкусом мяты №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":293,"s":"Tier A"},{"a":"508968","n":"Анти Токсин+ гель вишня саше 20г №1(20) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.394252631578947,"tr":239,"s":"Наша"},{"a":"649032","n":"DOLPHI Презервативы Prolong pleasure №3","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":348,"s":"Tier A"},{"a":"675053","n":"Салфетки влаж. Антибактериальный эффект №15 DR.NICE","c":"DR.NICE (СТМ)","pr":0.263322033898305,"tr":182,"s":"Наша"},{"a":"738709","n":"Запалиназа табл. п/о №10(3) Solution Pharm","c":"SOLUTION PHARM","pr":0.18424,"tr":280,"s":"Наша"},{"a":"447817","n":"Нефро-Он капли фл. 50мл Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":345,"s":"Tier A"},{"a":"813863","n":"CORBAKTOL Intensiv Антиперспирант антибакт. Deo-Spray Forte 75мл","c":"Лечебно-косметические средства","pr":0.4,"tr":814,"s":"Tier A"},{"a":"752002","n":"Левомеколь мазь 30г Э","c":"АПТЕКА ПАВЛОВА","pr":0.197,"tr":198,"s":"Наша"},{"a":"182191","n":"Шприц 1 мл 3-комп. U-100 инсул. с игл. н/съем. 30G (0.3x13мм) Alexpharm ","c":"ALEXPHARM","pr":0.16276,"tr":386,"s":"Наша"},{"a":"472729","n":"Расторопши плоды 200г Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.278259259259259,"tr":112,"s":"Наша"},{"a":"775918","n":"GREENWICH Зубная щетка универс. средней жесткости KLL042","c":"Красота и уход","pr":0.4,"tr":731,"s":"Tier A"},{"a":"595580","n":"Бодяга гель с стручковым перцем 75мл Solution Pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":542,"s":"Tier A"},{"a":"775917","n":"GREENWICH Зубная щетка универс. средней жесткости KLL036","c":"Красота и уход","pr":0.4,"tr":790,"s":"Tier A"},{"a":"527187","n":"Иммунопраш капс. №30","c":"Витамины и БАДы","pr":0.4,"tr":245,"s":"Tier A"},{"a":"485283","n":"Седаглицин табл. №10(5) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":449,"s":"Tier A"},{"a":"604707","n":"СинуЛИК капс. №20 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":466,"s":"Tier A"},{"a":"813862","n":"CORBAKTOL Green Fresh Антиперспирант антибакт. Deo-Spray Aloe 75мл","c":"Лечебно-косметические средства","pr":0.4,"tr":1090,"s":"Tier A"},{"a":"713602","n":"Хондро гель хондроитин с бодягой 50мл Solution Pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":495,"s":"Tier A"},{"a":"472728","n":"Льна семя 200г Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.258666666666667,"tr":99999,"s":"Наша"},{"a":"759545","n":"Проносил Плюс капс. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":228,"s":"Tier A"},{"a":"842276","n":"Глюкометр Herzen von Dr. Stein Ultra","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":1034,"s":"Tier A"},{"a":"518410","n":"СонекСон капс. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":940,"s":"Tier A"},{"a":"722073","n":"Артишок табл. 250мг №10(8) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.381395348837209,"tr":136,"s":"Наша"},{"a":"671005","n":"Метилурациловая мазь 10% 25г Э","c":"АПТЕКА ПАВЛОВА","pr":0.2122,"tr":318,"s":"Наша"},{"a":"112849","n":"Емкость д/забора мочи стер. 120мл URI-BOX New","c":"URI-BOX","pr":0.18484,"tr":14,"s":"Наша"},{"a":"701465","n":"Эхинацея экстракт табл. 250мг №10(5) Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.378252631578947,"tr":150,"s":"Наша"},{"a":"675613","n":"Проносил табл. №20 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.245148514851485,"tr":125,"s":"Наша"},{"a":"747606","n":"Мирамистин р-р д/наруж. прим. 0,01% 50мл Э","c":"АПТЕКА ПАВЛОВА","pr":0.21044,"tr":389,"s":"Наша"},{"a":"510009","n":"Хлорофиллипт Фармис Форте спрей д/рот. полости фл. 30мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.276138888888889,"tr":120,"s":"Наша"},{"a":"526538","n":"НефроФарм фиточай (почечный) фильтр-пак. 1,5г №20 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.243512195121951,"tr":99999,"s":"Наша"},{"a":"754218","n":"Салфетка со спирт.пропиткой 6смх3см №1(100) OK Pharma","c":"OK PHARMA","pr":0.16384,"tr":44,"s":"Наша"},{"a":"604705","n":"Иммуно Комплекс капс. №20 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":903,"s":"Tier A"},{"a":"569908","n":"Витамин D3 2000МE со вкусом малины табл. №30 Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.301152173913044,"tr":253,"s":"Наша"},{"a":"775913","n":"GREENWICH Зубочистки интердентальные 30шт KLL049","c":"Красота и уход","pr":0.4,"tr":1100,"s":"Tier A"},{"a":"432544","n":"Мефенаминовая кислота табл. 500мг №10(2)","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":1589,"s":"Tier A"},{"a":"668403","n":"Платочки бумаж. неароматиз. зеленые №9 Dani Baby","c":"Красота и уход","pr":0.4,"tr":218,"s":"Tier A"},{"a":"692220","n":"СеЙод табл. 0,25г №50 Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":636,"s":"Tier A"},{"a":"810378","n":"Новалакс Кидс микроклизма ректал. 5г №1(4) Solution Pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":777,"s":"Tier A"},{"a":"731539","n":"Сахарин табл. №50 Solution Pharm","c":"Товары для здоровья","pr":0.4,"tr":393,"s":"Tier A"},{"a":"738097","n":"Витамин С 500мг табл. жев. клубника №30 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":1164,"s":"Tier A"},{"a":"694315","n":"Слабексин кап. орал. пронос. фл. 30мл Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":293,"s":"Tier A"},{"a":"701060","n":"Седатиф (валериана) капс. жел. №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":936,"s":"Tier A"},{"a":"737610","n":"Салфетки гигиен. белые двухс. слож. V 20смх20см 80шт Аптека 911","c":"Красота и уход","pr":0.4,"tr":306,"s":"Tier A"},{"a":"775915","n":"GREENWICH Зубная щетка детс. 2-5лет ультрамяг. KLL005","c":"Товары для детей и мам","pr":0.4,"tr":1579,"s":"Tier A"},{"a":"739266","n":"Позитивчик табл. №10(5) Solution pharm","c":"Витамины и БАДы","pr":0.4,"tr":441,"s":"Tier A"},{"a":"568265","n":"Кардитрав капс. 352мг №20 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":306,"s":"Tier A"},{"a":"847301","n":"VPLAB UltraVit Премиум Омега-3 капс. №60","c":"Витамины и БАДы","pr":0.4,"tr":223,"s":"Tier A"},{"a":"224432","n":"Анти Токсин+ пор. 2г пакет-саше №1 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":1637,"s":"Tier A"},{"a":"775911","n":"GREENWICH Зубная нить аромат мяты 25м KLL055","c":"Красота и уход","pr":0.4,"tr":746,"s":"Tier A"},{"a":"775214","n":"GREENWICH Зубочистки 30шт TTH05","c":"Красота и уход","pr":0.4,"tr":366,"s":"Tier A"},{"a":"710311","n":"Индол капс. №10(6) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":804,"s":"Tier A"},{"a":"463657","n":"Окопник гель д/тела 50мл Solution Pharm","c":"Лечебно-косметические средства","pr":0.4,"tr":320,"s":"Tier A"},{"a":"758551","n":"Антистресс Фито табл. №10(3) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":548,"s":"Tier A"},{"a":"775916","n":"GREENWICH Зубная щетка детс. 6-8лет мягкая KLL011","c":"Товары для детей и мам","pr":0.4,"tr":2473,"s":"Tier A"},{"a":"590846","n":"Витамин С 500мг классический с облепихой табл. №30 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":481,"s":"Tier A"},{"a":"751358","n":"Релаксед MgB6 табл. №10(3) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":1093,"s":"Tier A"},{"a":"737611","n":"Салфетки гигиен. белые двухс. слож. V 20смх20см 80шт Solution pharm","c":"Красота и уход","pr":0.4,"tr":594,"s":"Tier A"},{"a":"668270","n":"Салфетки влаж. с аромат. зеленого чая №15 DR.NICE","c":"Красота и уход","pr":0.4,"tr":587,"s":"Tier A"},{"a":"775914","n":"GREENWICH Зубочистки двухсторон. 80шт KLL048","c":"Красота и уход","pr":0.4,"tr":2569,"s":"Tier A"},{"a":"695174","n":"Ингалюкс спрей д/ротов. полости баллон 30мл Solution pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":378,"s":"Tier A"},{"a":"756673","n":"Алтея фитосироп фл. 200мл Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":699,"s":"Tier A"},{"a":"705244","n":"Сорбилюкс Апельсин гель орал. пакет 20г №1(20) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":2179,"s":"Tier A"},{"a":"668271","n":"Салфетки влаж. с аромат. гибискуса №15 DR.NICE","c":"Красота и уход","pr":0.4,"tr":732,"s":"Tier A"},{"a":"122023","n":"Пластырь мед. Medrull Classic катуш. 3смx500см","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":607,"s":"Tier A"},{"a":"733144","n":"Салфетки гигиен. белые двухс. слож. V 20смх20см 80шт Dani Baby","c":"Красота и уход","pr":0.4,"tr":795,"s":"Tier A"},{"a":"599755","n":"Присыпка детская с чередой 45г Dani Baby","c":"Товары для детей и мам","pr":0.4,"tr":1325,"s":"Tier A"},{"a":"759550","n":"Синутрав сироп фл. 200мл Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":2949,"s":"Tier A"},{"a":"674133","n":"Басма индийская натур. 25г DR.NICE","c":"Красота и уход","pr":0.4,"tr":2753,"s":"Tier A"},{"a":"668269","n":"Салфетки влаж. д/детей с экстр. календулы №15 Dani Baby","c":"Товары для детей и мам","pr":0.4,"tr":357,"s":"Tier A"},{"a":"695163","n":"Камелюкс спрей д/ротов. полости баллон 30мл Solution pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":848,"s":"Tier A"},{"a":"122021","n":"Пластырь мед. Medrull Classic катуш. 2смx500см","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":746,"s":"Tier A"},{"a":"724527","n":"Диво крейда со вкусом лимона табл. 500мг №50 Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":514,"s":"Tier A"},{"a":"754472","n":"Гель д/интим. гигиены Антибактериальный 300мл Аптека 911","c":"Красота и уход","pr":0.4,"tr":489,"s":"Tier A"},{"a":"704915","n":"Сорбилюкс Ежевика гель орал. пакет 20г №1(20) Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":3613,"s":"Tier A"},{"a":"724543","n":"Диво крейда со вкусом клубники табл. 500мг №50 Solution Pharm","c":"Витамины и БАДы","pr":0.4,"tr":493,"s":"Tier A"},{"a":"733146","n":"Салфетки гигиен. белые двухс. слож. V 20смх20см 80шт Dr.Nice","c":"Красота и уход","pr":0.4,"tr":1406,"s":"Tier A"},{"a":"244453","n":"Ингалятор компрессорный Omron DuoBaby (NE-C301-E)","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":2244,"s":"Tier A"},{"a":"754473","n":"Гель д/интим. гигиены Успокаивающий 300мл Аптека 911","c":"Красота и уход","pr":0.4,"tr":539,"s":"Tier A"},{"a":"577901","n":"Витамин С 500мг классический с облепихой табл. №10 Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":445,"s":"Tier A"},{"a":"725992","n":"Шампунь-гель д/волос/тела 2в1 пантенол 10мл DR.NICE","c":"Красота и уход","pr":0.4,"tr":736,"s":"Tier A"},{"a":"702867","n":"СкинХилс Active Гель от трещин на пятках 50мл Solution Pharm","c":"Красота и уход","pr":0.4,"tr":6389,"s":"Tier A"},{"a":"122019","n":"Пластырь мед. Medrull Classic катуш. 1смx500см","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":981,"s":"Tier A"},{"a":"713986","n":"Л-бакт табл. д/рассас. какао №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":5256,"s":"Tier A"},{"a":"703766","n":"СкинХилс Intensive Гель от трещин на пятках 50мл Solution Pharm","c":"Красота и уход","pr":0.4,"tr":8209,"s":"Tier A"},{"a":"31300","n":"Массажер Тетраком спайдер №1","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":2474,"s":"Tier A"},{"a":"608044","n":"Пластырь хир. Пластфикс Angelmed эласт. неткан. 5мх10см №1","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":327,"s":"Tier A"},{"a":"713985","n":"Л-бакт табл. д/рассас. апельсин №10(2) Solution Pharm","c":"МЕДИКАМЕНТЫ","pr":0.4,"tr":6081,"s":"Tier A"},{"a":"67191","n":"Корректор осанки (реклинатор) детс. р.L,люкс MEDTEXTILE 2005","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":6037,"s":"Tier A"},{"a":"719508","n":"ANIAN Кондиционер д/волос с чайн. деревом детск. 250мл","c":"Товары для детей и мам","pr":0.4,"tr":491,"s":"Tier A"},{"a":"67680","n":"Шприц 10 мл 2-комп. 1 игла Гемопласт","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":485,"s":"Tier A"},{"a":"122020","n":"Пластырь мед. Medrull Classic катуш. 2смx250см","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":896,"s":"Tier A"},{"a":"521866","n":"Платочки носовые Beauty Цветы №10 FANTASY","c":"Красота и уход","pr":0.4,"tr":1024,"s":"Tier A"},{"a":"414439","n":"Бинт мед. эласт. средн.растяжимости 10мх12см АЛКОМ 5512","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":1531,"s":"Tier A"},{"a":"521869","n":"Платочки носовые Beauty без аромата №10 FANTASY","c":"Красота и уход","pr":0.4,"tr":976,"s":"Tier A"},{"a":"521868","n":"Платочки носовые Beauty Вишня №10 FANTASY","c":"Красота и уход","pr":0.4,"tr":1668,"s":"Tier A"},{"a":"172908","n":"Бинт мед. эласт. средн.растяжимости 2,5мх8см АЛКОМ 5508","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":518,"s":"Tier A"},{"a":"227913","n":"Бинт мед. эласт. средн.растяжимости 2мх10см АЛКОМ 5510","c":"Медтехника и изделия медицинского назнач","pr":0.4,"tr":760,"s":"Tier A"}],"t30":[{"a":"593134","n":"Натфлу капс. 75мг №10","c":"НАТФЛУ (СТМ)","pr":0.05,"tr":20},{"a":"219665","n":"Хелпекс Антиколд Нео Макс пор. д/орал. р-ра лимон саше 4г №1(10)","c":"ХЕЛПЕКС","pr":0.05,"tr":18},{"a":"112826","n":"Аффида Форт гран. д/орал. сусп. 100мг саше 2г №1(30)","c":"АФФИДА","pr":0.05,"tr":58},{"a":"700742","n":"Цитрик пор. д/орал. р-ра саше 13,60г №1(10)","c":"ЦИТРИК (СТМ)","pr":0.01032,"tr":45},{"a":"663580","n":"SUNLIFE Витамины A-Z + Lutein Completten капл. №60","c":"SUNLIFE (СТМ)","pr":0.131871275327771,"tr":4314},{"a":"652681","n":"Вода д/спец. медицинских целей Аквасорб 950мл NEW","c":"АКВАСОРБ (СТМ)","pr":0.0437310924369749,"tr":1349},{"a":"756659","n":"Флюаут леденцы малина №12(2) Solution Pharm","c":"ФЛЮАУТ (СТМ)","pr":0.0432,"tr":99999},{"a":"677546","n":"Меновазин р-р спирт. фл. 100мл","c":"МЕНОВАЗИН","pr":0.05,"tr":82},{"a":"756667","n":"Флюаут сироп исландского мха фл. 200мл Solution pharm","c":"ФЛЮАУТ (СТМ)","pr":0.104034042553192,"tr":3719},{"a":"804176","n":"Ибупрофен табл. п/о 400мг №10(5)","c":"ИБУПРОФЕН (СТМ)","pr":0.05,"tr":5},{"a":"1139","n":"Левомеколь мазь туба в пачке 40г","c":"ЛЕВОМЕКОЛЬ","pr":0.05,"tr":187},{"a":"445090","n":"Шприц 5 мл 3-комп. 2 иглы 23G и 22G Angelmed","c":"ANGELMED (СТМ)","pr":0.116307692307692,"tr":18},{"a":"817656","n":"Измеритель (тонометр) АД Paramed Pro автомат.","c":"PARAMED (СТМ)","pr":0.100015094339623,"tr":102},{"a":"756666","n":"Флюаут сироп плюща фл. 200мл Solution pharm","c":"ФЛЮАУТ (СТМ)","pr":0.104034042553192,"tr":4273},{"a":"783413","n":"Цефтриаксон Ананта пор. д/р-ра д/ин. фл. 1г №1","c":"ЦЕФТРИАКСОН (СТМ)","pr":0.141333333333333,"tr":139},{"a":"15416","n":"Ибупрофен табл. п/о 200мг №10(5)","c":"ИБУПРОФЕН","pr":0.05,"tr":99999},{"a":"169838","n":"Нифуроксазид-Сперко капс. 200мг №12","c":"НИФУРОКСАЗИД (СТМ)","pr":0.05,"tr":99999},{"a":"611006","n":"Диклофенак гель 50мг/г туба ламин. 100г","c":"ДИКЛОФЕНАК","pr":0.05,"tr":59},{"a":"214954","n":"Могинин табл. п/о 100мг №4","c":"МОГИНИН (СТМ)","pr":0.05,"tr":63},{"a":"711067","n":"Мелоксикам р-р д/ин. 15мг/1,5мл амп. 1,5мл №1(5)","c":"МЕЛОКСИКАМ","pr":0.05,"tr":126},{"a":"795228","n":"Термометр без ртути медицинский стекл. МС-10 2B №1","c":"2B","pr":0.05,"tr":24},{"a":"447313","n":"Йод-Вишфа р-р спирт. 5% фл. 20мл","c":"ЙОД","pr":0.05,"tr":52},{"a":"540709","n":"Солен р-р д/инф. 0,9% конт. 100мл ","c":"СОЛЕН","pr":0.05,"tr":49},{"a":"235585","n":"Бахилы одноразовые н/ст. п/э 3г пара","c":"SANGIG","pr":0.08328,"tr":36},{"a":"219666","n":"Хелпекс Антиколд Нео Макс пор. д/орал. р-ра малина саше 4г №1(10)","c":"ХЕЛПЕКС","pr":0.05,"tr":282},{"a":"158082","n":"Анальгин табл. 500мг №10","c":"АНАЛЬГИН","pr":0.00559999999999999,"tr":53},{"a":"805197","n":"Перекись вод. -Вишфа р-р 3% фл. полим. 200мл","c":"ПЕРЕКИСЬ ВОДОРОДА","pr":0.05,"tr":52},{"a":"214955","n":"Могинин табл. п/о 50мг №4","c":"МОГИНИН (СТМ)","pr":0.05,"tr":53},{"a":"44833","n":"Хелпекс Антиколд DX табл. №10(10)","c":"ХЕЛПЕКС","pr":0.05,"tr":118},{"a":"463737","n":"Система ПР Luer Slip с метал. шипом Angelmed","c":"ANGELMED (СТМ)","pr":0.0215384615384616,"tr":48},{"a":"72520","n":"Димексид-ЖФФ жидк. д/наруж. прим. фл. 50мл","c":"ДИМЕКСИД","pr":0.05,"tr":35},{"a":"707080","n":"Мефенаминовая кислота табл. 500мг №10(2)","c":"МЕФЕНАМИНОВАЯ КИСЛОТА","pr":0.00695999999999999,"tr":53},{"a":"828220","n":"Тест Covid-19 Мульти Вирус Комбо д/опр. антиг. Covid-19/гриппа А/В д/самоконт. н","c":"TESTSEALABS","pr":0.1434,"tr":13},{"a":"688214","n":"Хлоргексидин р-р 0,05% фл. 200мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.100965517241379,"tr":30},{"a":"38516","n":"Эротон табл. 100мг №4","c":"ЭРОТОН","pr":0.05,"tr":149},{"a":"34331","n":"Меновазан мазь туба 40г","c":"МЕНОВАЗАН","pr":0.05,"tr":33},{"a":"175920","n":"Айдринк пор. д/орал. р-ра лимон 4,8г саше №1(10)","c":"АЙДРИНК (СТМ)","pr":0.01508,"tr":1848},{"a":"214942","n":"Валидол-Лубныфарм табл. 60мг №10","c":"ВАЛИДОЛ","pr":0.007,"tr":71},{"a":"688211","n":"Хлоргексидин р-р 0,05% фл. 100мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.0470909090909092,"tr":72},{"a":"622900","n":"Новагра Евро табл. п/о 100мг №4","c":"НОВАГРА","pr":0.05,"tr":58},{"a":"598064","n":"Синафлана мазь туба 15г","c":"СИНАФЛАН","pr":0.05,"tr":99999},{"a":"757501","n":"Флюаут спрей д/горла с хлорофиллиптом фл. 30мл Solution pharm","c":"ФЛЮАУТ (СТМ)","pr":0.00111111111111115,"tr":41},{"a":"817654","n":"Измеритель (тонометр) АД Paramed Top автомат.","c":"PARAMED (СТМ)","pr":0.100018433179724,"tr":132},{"a":"790197","n":"Аква Ди Маре морская вода аэроз. д/носа 0,9% баллон 150мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.05,"tr":102},{"a":"260650","n":"Диклофенак гель 50мг/г туба 50г","c":"ДИКЛОФЕНАК","pr":0.05,"tr":60},{"a":"626119","n":"SUNLIFE Витамины Vitamin C 300 + Zink 5 Brausetabletten таб. шип. №17","c":"SUNLIFE (СТМ)","pr":0.11504,"tr":4935},{"a":"760658","n":"Тест Covid-19 д/опр. антигенов коронавируса/гриппа А и В Мультигрип назал. №1","c":"МУЛЬТИГРИП","pr":0.0638,"tr":9},{"a":"194638","n":"Дротаверин табл. 40мг №10(2)","c":"ДРОТАВЕРИН","pr":0.05,"tr":93},{"a":"80566","n":"Ацетилсалициловая к-та (аспирин) табл. 500мг №10","c":"АЦЕТИЛСАЛИЦИЛОВАЯ КИСЛОТА","pr":0.05,"tr":84},{"a":"466434","n":"Термометр без ртути медицинский стекл. Paramed №1","c":"PARAMED","pr":0.14472,"tr":31},{"a":"756668","n":"Флюаут сироп подорожника фл. 200мл Solution pharm","c":"ФЛЮАУТ (СТМ)","pr":0.104034042553192,"tr":99999},{"a":"684134","n":"Перекись вод. р-р 3% фл. 100мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.037,"tr":137},{"a":"790237","n":"Аква Ди Маре морская вода аэроз. д/носа 0,9% баллон 50мл Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.00133333333333338,"tr":106},{"a":"309587","n":"Спирт этиловый р-р д/наруж. прим. 96% фл. 100мл","c":"СПИРТ ЭТИЛОВЫЙ","pr":0.05,"tr":142},{"a":"459290","n":"Пластырь бакт. Angelmed ткан. 19ммx72мм №10","c":"ANGELMED (СТМ)","pr":0.117185185185185,"tr":28},{"a":"734546","n":"Вода мин. Аптека 911 негаз. 0,5л","c":"911 (СТМ)","pr":0.0760000000000001,"tr":48},{"a":"663554","n":"Шприц 2 мл 3-комп. 2 иглы 23G и 24G Швидка допомога","c":"ШВИДКА ДОПОМОГА (СТМ)","pr":0.0705454545454547,"tr":100},{"a":"663556","n":"Шприц 5 мл 3-комп. 2 иглы 23G и 22G Швидка допомога","c":"ШВИДКА ДОПОМОГА (СТМ)","pr":0.122461538461539,"tr":126},{"a":"38514","n":"Эротон табл. 50мг №4","c":"ЭРОТОН","pr":0.05,"tr":192},{"a":"472718","n":"Ромашки цветки 40г Solution Pharm","c":"SOLUTION PHARM (СТМ)","pr":0.000651162790697644,"tr":150},{"a":"61668","n":"Пластырь мозол. Dr. House №5","c":"DR.HOUSE","pr":0.08164,"tr":210},{"a":"322729","n":"Меновазин-Вишфа р-р д/наруж. прим. спирт. фл. 40мл","c":"МЕНОВАЗИН","pr":0.05,"tr":59},{"a":"279923","n":"Силденафил 50 Ананта табл. п/о 50мг №4","c":"СИЛДЕНАФИЛ (СТМ)","pr":0.05,"tr":106},{"a":"670631","n":"SUNLIFE Витамины Vitamin C 1000 табл. шип. №20","c":"SUNLIFE (СТМ)","pr":0.130608,"tr":1249},{"a":"445088","n":"Шприц 2 мл 3-комп. 2 иглы 23G и 24G Angelmed","c":"ANGELMED (СТМ)","pr":0.140363636363636,"tr":97},{"a":"44831","n":"Хелпекс Антиколд табл. №10(10)","c":"ХЕЛПЕКС","pr":0.05,"tr":99999},{"a":"158119","n":"Бронхо Веда Леденцы трав. апельсин банка №1(300)","c":"БРОНХО ВЕДА","pr":0.05,"tr":91},{"a":"190113","n":"Хелпекс Антиколд Нео пор. д/орал. р-ра с лимон. вкусом саше 4г №1(10)","c":"ХЕЛПЕКС","pr":0.05,"tr":65},{"a":"280507","n":"Вишневского линимент туба 40г в пачке","c":"ВИШНЕВСКОГО МАЗЬ","pr":0.05,"tr":65},{"a":"36976","n":"Вазелин мазь туба 25г","c":"ВАЗЕЛИН","pr":0.01164,"tr":69},{"a":"43903","n":"Лоратадин табл. 10мг №10","c":"ЛОРАТАДИН","pr":0.05,"tr":208},{"a":"172958","n":"Фиорда паст. для рассасыв. чорн.смородина №15(2)","c":"ФИОРДА","pr":0.05,"tr":71},{"a":"592872","n":"Тест д/опред.беремен. полоска Angelmed (10 мМЕ/мл) экспресс желт. №1","c":"ANGELMED (СТМ)","pr":0.0427692307692308,"tr":47},{"a":"757504","n":"КетоХелп Шампунь против перхоти фл. 100мл Solution pharm","c":"SOLUTION PHARM (СТМ)","pr":0.0561415929203541,"tr":99999},{"a":"723383","n":"Ингалятор компрессорный Herzen von Dr. Stein небулайзер Optima","c":"HERZEN (СТМ)","pr":0.109486075949367,"tr":195},{"a":"34166","n":"Тест д/опред.беремен. полоска Evitest красный №1","c":"EVITEST","pr":0.05,"tr":113},{"a":"665337","n":"Фортеза леден. со вкусом апельсина/меда 3мг №12(2)","c":"ФОРТЕЗА","pr":0.05,"tr":90},{"a":"709024","n":"Амоксициллин капс. 500мг №10","c":"АМОКСИЦИЛЛИН","pr":0.05,"tr":99999},{"a":"65570","n":"Зотек табл. п/о 400мг №10","c":"ЗОТЕК","pr":0.05,"tr":31},{"a":"273606","n":"Силденафил 100 Ананта табл. п/о 100мг №4","c":"СИЛДЕНАФИЛ (СТМ)","pr":0.05,"tr":29},{"a":"757500","n":"Флюаут спрей назал. с коллоид. сереб./экстр. цикламена фл. 15мл Solution Pharm","c":"ФЛЮАУТ (СТМ)","pr":0.0196296296296297,"tr":66},{"a":"837062","n":"Пустырника н-ка фл. 50мл","c":"ПУСТЫРНИК","pr":0.01204,"tr":92},{"a":"843396","n":"Ингалятор компрессорный Paramed Nano небулайзер NEW","c":"PARAMED (СТМ)","pr":0.1,"tr":164},{"a":"704011","n":"Глицерин р-р накож. 85% фл. 100мл Solution Pharm","c":"SOLUTION PHARM","pr":0.1292,"tr":510},{"a":"445282","n":"Календула-Вишфа н-ка фл. 50мл","c":"КАЛЕНДУЛА","pr":0.05,"tr":23},{"a":"765","n":"Бриллиант. зеленый р-р спирт. 1% фл. 20мл (Зелёнка)","c":"ЗЕЛЕНЬ БРИЛЛИАНТОВАЯ","pr":0.05,"tr":78},{"a":"35005","n":"Тест д/опред.беремен. полоска Evitest синий №2","c":"EVITEST","pr":0.05,"tr":43},{"a":"56796","n":"Кетолак табл. 10мг №10","c":"КЕТОЛАК","pr":0.05,"tr":128},{"a":"641539","n":"SUNLIFE Витамины Magnesium 400 Stark fur die Nacht табл. №32","c":"SUNLIFE (СТМ)","pr":0.05,"tr":81305},{"a":"2555","n":"Ромашки цветки 40г","c":"ЛЕКТРАВЫ","pr":0.05,"tr":41},{"a":"726047","n":"Измеритель (тонометр) АД Herzen von Dr. Stein механ. Universal","c":"HERZEN (СТМ)","pr":0.0562307692307693,"tr":133},{"a":"648067","n":"Емкость д/забора мочи стер. 120мл Angelmed","c":"ANGELMED (СТМ)","pr":0.0170909090909092,"tr":66}],"t15":[{"a":"6527","n":"Фервекс д/взр. пор. д/орал. р-ра саше №1(8)","c":"ФЕРВЕКС","pr":0.05,"tr":24},{"a":"38337","n":"Назалонг спрей назал. дозир. 0,05% фл. 10г","c":"НАЗАЛОНГ","pr":0.05,"tr":99999},{"a":"768920","n":"Нурофен Форте табл. п/о 400мг №12(2)","c":"НУРОФЕН","pr":0.05,"tr":43},{"a":"412641","n":"Спирт этиловый 96% р-р 96% фл. 100мл","c":"СПИРТ ЭТИЛОВЫЙ","pr":0.05,"tr":48},{"a":"183","n":"АЦЦ Лонг табл. шип. 600мг №10","c":"АЦЦ","pr":0.05,"tr":26},{"a":"514219","n":"Долоксен табл. п/о №10(10)","c":"ДОЛОКСЕН","pr":0.05,"tr":186},{"a":"1400","n":"Нафтизин кап. назал. 0,1% фл. 10мл п/э","c":"НАФТИЗИН","pr":0.00164,"tr":117},{"a":"504106","n":"Азельта табл. 75мг №10","c":"АЗЕЛЬТА","pr":0.05,"tr":99999},{"a":"783092","n":"Олидетрим 2000 Витамин D3 капс. №30(2)","c":"ОЛИДЕТРИМ","pr":0.05,"tr":34},{"a":"782678","n":"Олидетрим 4000 Витамин D3 капс. №30(2)","c":"ОЛИДЕТРИМ","pr":0.05,"tr":32},{"a":"279781","n":"Бронхалик леденцы 2,85г №10(2)","c":"БРОНХАЛИК","pr":0.05,"tr":82},{"a":"169330","n":"Нурофен Экспресс Форте капс. мягкие 400мг №10","c":"НУРОФЕН","pr":0.05,"tr":87},{"a":"27247","n":"Фервекс д/взр. малина пор. д/орал. р-ра саше №1(8)","c":"ФЕРВЕКС","pr":0.05,"tr":32},{"a":"284027","n":"Олидетрим Кидс кап. орал. фл. 10мл","c":"ОЛИДЕТРИМ","pr":0.05,"tr":84},{"a":"304122","n":"Галазолин Комби спрей назал. р-р 1мг+50мг/мл фл. 10мл","c":"ГАЛАЗОЛИН","pr":0.05,"tr":241},{"a":"446093","n":"Рапира 600 пор. д/орал. р-ра 600мг саше 3г №1(10)","c":"РАПИРА (СТМ)","pr":0.05,"tr":26},{"a":"103142","n":"Азитромицин-Астрафарм капс. 500мг №3","c":"АЗИТРОМИЦИН","pr":0.05,"tr":31},{"a":"192021","n":"Натрия хлорид (физ. раствор) р-р д/инф. 0,9% бут. 100мл","c":"НАТРИЯ ХЛОРИД","pr":0.05,"tr":44},{"a":"155983","n":"Фортеза спрей д/ротов. пол. 0,15% фл. 30мл","c":"ФОРТЕЗА","pr":0.05,"tr":31},{"a":"499599","n":"Измеритель (тонометр) АД Paramed Expert-X автомат.","c":"PARAMED","pr":0.05,"tr":122},{"a":"212622","n":"Нокспрей спрей назал. 0,05% конт. 10мл","c":"НОКСПРЕЙ","pr":0.00152,"tr":112},{"a":"158302","n":"Септефрил-Дарница табл. 0,2мг №10(2)","c":"СЕПТЕФРИЛ","pr":0.05,"tr":53},{"a":"759677","n":"Гепаргин р-р орал. стик 10мл №1(20)","c":"ГЕПАРГИН (СТМ)","pr":0.05,"tr":35},{"a":"1359","n":"Мукалтин табл. 50мг №30","c":"МУКАЛТИН","pr":0.05,"tr":129},{"a":"44146","n":"Пектолван Плющ сироп фл. 100мл","c":"ПЕКТОЛВАН","pr":0.05,"tr":95},{"a":"199615","n":"Вода д/спец. медицинских целей ReO 950мл","c":"REO","pr":0.0146,"tr":352},{"a":"80739","n":"Натрия хлорид (физ. раствор) р-р д/инф. 0,9% бут. 200мл","c":"НАТРИЯ ХЛОРИД","pr":0.05,"tr":99999},{"a":"138092","n":"Кейвер р-р д/ин. 50мг/2мл амп. 2мл №1(10)","c":"КЕЙВЕР","pr":0.05,"tr":62},{"a":"226753","n":"Пертуссин сироп фл. 200г в пачке","c":"ПЕРТУССИН","pr":0.05,"tr":121},{"a":"16071","n":"Колдрекс МаксГрипп лимон пор. д/орал. р-ра №1(10)","c":"КОЛДРЕКС","pr":0.05,"tr":92},{"a":"187813","n":"Ограния капс. 300мг №10(3)","c":"ОГРАНИЯ","pr":0.05,"tr":426},{"a":"6978","n":"АЦЦ горяч. напиток мед лимон пор. д/орал. р-ра 600мг пак. 3г №1(6)","c":"АЦЦ","pr":0.05,"tr":237},{"a":"29525","n":"Ремантадин-КР табл. 0,05г №10(2)","c":"РЕМАНТАДИН","pr":0.05,"tr":62},{"a":"70730","n":"Димедрол р-р д/ин. 1% амп. 1мл №1(10)","c":"ДИМЕДРОЛ","pr":0.05,"tr":141},{"a":"15634","n":"Милистан мультисимптомный капл. п/о №12","c":"МИЛИСТАН","pr":0.05,"tr":190},{"a":"499598","n":"Измеритель (тонометр) АД Paramed One-X автомат.","c":"PARAMED","pr":0.05,"tr":129},{"a":"151014","n":"Линекс капс. №8(2)","c":"ЛИНЕКС","pr":0.05,"tr":58},{"a":"158193","n":"Фурацилин табл. 20мг №10(2)","c":"ФУРАЦИЛИН","pr":0.05,"tr":54},{"a":"187714","n":"Циннаризин Софарма табл. 25мг №50","c":"ЦИННАРИЗИН","pr":0.05,"tr":51},{"a":"292841","n":"Дефлю Сильвер Горло спрей фл. 30мл","c":"ДЕФЛЮ","pr":0.05,"tr":42},{"a":"539","n":"Гексаспрей спрей оромук. 750мг фл. 30г","c":"ГЕКСАСПРЕЙ","pr":0.05,"tr":70},{"a":"458442","n":"Фламидез гель туба 100г","c":"ФЛАМИДЕЗ","pr":0.05,"tr":169},{"a":"543012","n":"Комбиспазм табл. №10(2)","c":"КОМБИСПАЗМ","pr":0.05,"tr":55},{"a":"672507","n":"Рапира Эфертаб 600 табл. шип. 600мг №10","c":"РАПИРА (СТМ)","pr":0.05,"tr":36},{"a":"88807","n":"Колдрекс МаксГрипп лесн.ягоды пор. д/орал. р-ра №1(10)","c":"КОЛДРЕКС","pr":0.05,"tr":99999},{"a":"265231","n":"Боярышник-Вишфа н-ка фл. 100мл пласт.","c":"БОЯРЫШНИК","pr":0.05,"tr":99999},{"a":"691214","n":"Гепариновая мазь туба 40г","c":"ГЕПАРИНОВАЯ МАЗЬ","pr":0.05,"tr":27},{"a":"773682","n":"Деквадол табл. д/рассасыв. малина №12(3)","c":"ДЕКВАДОЛ","pr":0.05,"tr":209},{"a":"292789","n":"Дефлю Сильвер Нос спрей д/носа фл. 15мл","c":"ДЕФЛЮ","pr":0.05,"tr":99999},{"a":"276363","n":"Супероптик Аква капли глаз. увл. фл. 5мл №1(2)","c":"СУПЕРОПТИК","pr":0.05,"tr":99999},{"a":"2441","n":"Фервекс д/дет. пор. д/орал. р-ра саше №1(8)","c":"ФЕРВЕКС","pr":0.05,"tr":167},{"a":"651074","n":"Риназолин спрей назал. 0,5мг/мл фл. 10мл","c":"РИНАЗОЛИН","pr":0.05,"tr":66},{"a":"89729","n":"Напрофф табл. п/о 550мг №10","c":"НАПРОФФ (СТМ)","pr":0.05,"tr":99999},{"a":"20190","n":"Дип Рилиф гель туба 100г","c":"ДИП РИЛИФ","pr":0.05,"tr":51},{"a":"94380","n":"Аква Марис cпрей назальный 30мл","c":"АКВА МАРИС","pr":0.05,"tr":104},{"a":"451518","n":"Рафт (дексаметазон) р-р д/ин. 4мг/мл амп. 1мл №1(10)","c":"РАФТ","pr":0.05,"tr":78},{"a":"658339","n":"Амбит (кеторолак) табл. п/о 10мг №10","c":"АМБИТ (СТМ)","pr":0.05,"tr":22},{"a":"594053","n":"Лактиале Жермина для детей сусп. фл. 5мл №1(10)","c":"ЛАКТИАЛЕ","pr":0.05,"tr":71},{"a":"71113","n":"Ингалипт-Н спрей д/инг. баллон 30г","c":"ИНГАЛИПТ","pr":0.05,"tr":53},{"a":"27695","n":"Хьюмер 150 д/взрослых спрей назал. 150мл","c":"ХЬЮМЕР","pr":0.05,"tr":74},{"a":"129863","n":"Оптинол кап. глаз. 0,21% фл. 10мл","c":"ОПТИНОЛ","pr":0.05,"tr":99999},{"a":"9281","n":"Дип Рилиф гель туба 50г","c":"ДИП РИЛИФ","pr":0.05,"tr":22},{"a":"2268","n":"Тауфон кап. глаз. 40мг/мл фл. 10мл","c":"ТАУФОН","pr":0.05,"tr":37},{"a":"187812","n":"Ограния капс. 150мг №10(3)","c":"ОГРАНИЯ","pr":0.05,"tr":99999},{"a":"39882","n":"Ацикловир мазь 2,5% туба 10г","c":"АЦИКЛОВИР","pr":0.05,"tr":74},{"a":"773681","n":"Деквадол табл. д/рассасыв. лимон №12(3)","c":"ДЕКВАДОЛ","pr":0.05,"tr":37},{"a":"461346","n":"Ремесулид Рапид гран. д/орал. сусп. 100мг/2г саше 2г №1(10)","c":"РЕМЕСУЛИД","pr":0.05,"tr":76},{"a":"529212","n":"NatHealth Леденцы мультивитамины д/детей №1(100)","c":"NATHEALTH","pr":0.05,"tr":118},{"a":"70462","n":"Аспаркам Артериум табл. №50","c":"АСПАРКАМ","pr":0.05,"tr":388},{"a":"159656","n":"Линекс форте капс. №7","c":"ЛИНЕКС","pr":0.05,"tr":99999},{"a":"421609","n":"Пантенол Плюс крем туба 30г","c":"ПАНТЕНОЛ","pr":0.05,"tr":37},{"a":"557131","n":"Вода пит. Dani baby негаз. 5л","c":"DANI BABY (СТМ)","pr":0.0312571428571429,"tr":51},{"a":"94043","n":"Касторовое масло фл. 100г","c":"КАСТОРОВОЕ МАСЛО","pr":0.05,"tr":55},{"a":"192279","n":"Хлоргексидин р-р 0,05% фл. 200мл ","c":"ХЛОРГЕКСИДИН","pr":0.05,"tr":51},{"a":"73937","n":"Натрия хлорид (физ. раствор) р-р д/инф. 0,9% бут. 200мл (Артериум)","c":"НАТРИЯ ХЛОРИД","pr":0.05,"tr":99999},{"a":"9340","n":"Апизартрон мазь туба 20г","c":"АПИЗАРТРОН","pr":0.05,"tr":30},{"a":"10485","n":"Фервекс д/взр. б/сах. пор. д/орал. р-ра саше №1(8)","c":"ФЕРВЕКС","pr":0.05,"tr":564},{"a":"193440","n":"Зеркалин р-р накож. 1% фл. 30мл","c":"ЗЕРКАЛИН","pr":0.05,"tr":79},{"a":"263264","n":"Альбендазол табл. д/жев. 400мг №3","c":"АЛЬБЕНДАЗОЛ","pr":0.05,"tr":36},{"a":"670393","n":"Новагра Евро табл. п/о 100мг №4(2)","c":"НОВАГРА","pr":0.05,"tr":115},{"a":"15325","n":"Сондокс табл. 0,015г №10(3)","c":"СОНДОКС","pr":0.05,"tr":99999},{"a":"843185","n":"Нефам р-р д/ин. 10мг/мл амп. 2мл №1(10)","c":"НЕФАМ","pr":0.05,"tr":116},{"a":"498569","n":"Эссенциале Н форте капс. №10(10)","c":"ЭССЕНЦИАЛЕ","pr":0.05,"tr":54}],"tacc":[{"a":"756659","n":"Флюаут леденцы малина №12(2) Solution Pharm","c":"ФЛЮАУТ","pr":0.05,"tr":null},{"a":"756661","n":"Флюаут леденцы мед/лимон №12(2) Solution pharm","c":"ФЛЮАУТ","pr":0.05,"tr":null},{"a":"619886","n":"Маридоза Интенсив Спрей назал. гипертон. с морской водой 100мл","c":"МАРИДОЗА","pr":0.05,"tr":null},{"a":"490760","n":"Азтек (азитромицин) табл. п/о 500мг №3","c":"АЗТЕК","pr":0.05,"tr":null},{"a":"756658","n":"Флюаут леденцы апельсин №12(2) Solution pharm","c":"ФЛЮАУТ","pr":0.05,"tr":null},{"a":"754820","n":"Таргифен пластырь обезбол. с лидокаином 10смx14см №1(5) Silvestrini","c":"ТАРГИФЕН","pr":0.05,"tr":null},{"a":"175920","n":"Айдринк пор. д/орал. р-ра лимон 4,8г саше №1(10)","c":"АЙДРИНК","pr":0.05,"tr":null},{"a":"51137","n":"Веносмин табл. п/о 500мг №10(6)","c":"ВЕНОСМИН","pr":0.05,"tr":null},{"a":"513929","n":"Силицеа Гель д/желудочно-кишечной с-мы саше 15мл №1(30)","c":"SILICEA","pr":0.05,"tr":null},{"a":"795207","n":"Омега-3 Дневная норма капс. №15(2) DR.KOMAROVSKIY","c":"DR.KOMAROVSKIY","pr":0.05,"tr":null},{"a":"756668","n":"Флюаут сироп подорожника фл. 200мл Solution pharm","c":"ФЛЮАУТ","pr":0.05,"tr":null},{"a":"738091","n":"Тонухол табл. п/о №10(5)","c":"ТОНУХОЛ","pr":0.05,"tr":null},{"a":"779104","n":"Цинк Крем банка 50г DR.KOMAROVSKIY","c":"DR.KOMAROVSKIY","pr":0.05,"tr":null},{"a":"597837","n":"Лазин табл. п/о 5мг №10(3)","c":"ЛАЗИН","pr":0.05,"tr":null},{"a":"743832","n":"Измеритель (тонометр) АД Herzen von Dr. Stein автомат. Classic","c":"HERZEN","pr":0.05,"tr":null},{"a":"743834","n":"Измеритель (тонометр) АД Herzen von Dr. Stein автомат. Prime","c":"HERZEN","pr":0.05,"tr":null},{"a":"833190","n":"Магний табл. №20(3) DR.KOMAROVSKIY","c":"DR.KOMAROVSKIY","pr":0.05,"tr":null},{"a":"743831","n":"Измеритель (тонометр) АД Herzen von Dr. Stein автомат. Standard","c":"HERZEN","pr":0.05,"tr":null},{"a":"773873","n":"Анти Токсин+ гель вишня саше 20г №1(20) Solution pharm","c":"SOLUTION PHARM","pr":0.05,"tr":null},{"a":"648521","n":"Пантенол форте спрей-пена Geling 150мл","c":"GELING","pr":0.05,"tr":null},{"a":"838937","n":"Цинк Крем банка 100г DR.KOMAROVSKIY","c":"DR.KOMAROVSKIY","pr":0.05,"tr":null},{"a":"756675","n":"Таблетки от изжоги малина №10(2) Solution pharm","c":"SOLUTION PHARM","pr":0.05,"tr":null},{"a":"756674","n":"Таблетки от изжоги лесная ягода №10(2) Solution pharm","c":"SOLUTION PHARM","pr":0.05,"tr":null},{"a":"833189","n":"Электролит смесь регидрат. саше №1(30) DR.KOMAROVSKIY","c":"DR.KOMAROVSKIY","pr":0.05,"tr":null}]};
+const TIER_META = {
+  t100: { rate: '100%', title: 'Повністю за бонуси', total: 147, modalClass: '' },
+  t30:  { rate: '30%',  title: 'Третина ціни',       total: 92,  modalClass: 't-2' },
+  t15:  { rate: '15%',  title: 'Помірна знижка',     total: 83,  modalClass: 't-3' },
+  tacc: { rate: '+10%', title: 'Більше нарахування', total: 24,  modalClass: 't-4' }
+};
+
+function fmtRate(v) { return (v == null) ? '—' : Math.round(v * 100) + '%'; }
+function fmtTurn(v) { return (v == null) ? '—' : Math.round(v); }
+
+function shortName(name, max) {
+  if (!name) return '';
+  if (name.length <= max) return name;
+  return name.slice(0, max - 1).trim() + '…';
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\'/g, '&#39;');
+}
+
+function pluralize(n, one, few, many) {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 10 || m100 >= 20)) return few;
+  return many;
+}
+
+/* Top-3 previews in tier cards */
+document.querySelectorAll('[data-preview]').forEach(ul => {
+  const key = ul.dataset.preview;
+  const items = (SKU_DATA[key] || []).slice(0, 3);
+  ul.innerHTML = items.map(it =>
+    `<li><span class="dot"></span><span class="name">${escapeHtml(shortName(it.n, 42))}</span></li>`
+  ).join('');
+});
+
+/* MODAL */
+const modal = document.getElementById('skuModal');
+const modalCard = document.getElementById('skuModalCard');
+const modalRate = document.getElementById('skuModalRate');
+const modalTitle = document.getElementById('skuModalTitle');
+const modalSub = document.getElementById('skuModalSub');
+const modalList = document.getElementById('skuModalList');
+
+function openSkuModal(tierKey) {
+  const meta = TIER_META[tierKey];
+  modalCard.classList.remove('t-2','t-3','t-4');
+  if (meta.modalClass) modalCard.classList.add(meta.modalClass);
+  modalRate.textContent = meta.rate;
+  modalTitle.textContent = meta.title;
+  modalSub.textContent = meta.total + ' ' + pluralize(meta.total, 'товар','товари','товарів');
+  renderSkuList(tierKey);
+  modal.classList.add('open');
+  document.body.classList.add('modal-open');
+}
+
+function closeSkuModal() {
+  modal.classList.remove('open');
+  document.body.classList.remove('modal-open');
+}
+
+function renderSkuList(tierKey) {
+  const items = SKU_DATA[tierKey] || [];
+  const html = items.map((it, i) => {
+    const rank = i + 1;
+    const badge = it.s === 'Наша' ? '<span class="sku-badge our">Наша</span>'
+                : it.s === 'Tier A' ? '<span class="sku-badge ta">Комерція</span>' : '';
+    const turnBlock = (it.tr != null)
+      ? `<div class="sku-stat"><div class="sku-stat-val">${fmtTurn(it.tr)}</div><div class="sku-stat-lbl">Залишок, днів</div></div>`
+      : '';
+    return `<div class="sku-row">
+      <div>
+        <div class="sku-rank">№${rank}</div>
+        <div class="sku-art">арт. ${escapeHtml(it.a)}</div>
+      </div>
+      <div>
+        <div class="sku-name">${badge}${escapeHtml(it.n)}</div>
+        <div class="sku-cat">${escapeHtml(it.c || '—')}</div>
+      </div>
+      <div class="sku-aside">
+        <div class="sku-stat"><div class="sku-stat-val">${fmtRate(it.pr)}</div><div class="sku-stat-lbl">Було</div></div>
+        ${turnBlock}
+      </div>
+    </div>`;
+  }).join('');
+  modalList.innerHTML = html;
+  modalList.scrollTop = 0;
+}
+
+document.querySelectorAll('[data-modal]').forEach(btn => {
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    openSkuModal(btn.dataset.modal);
+  });
+});
+document.getElementById('skuModalClose').addEventListener('click', closeSkuModal);
+modal.addEventListener('click', e => { if (e.target === modal) closeSkuModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('open')) closeSkuModal(); });
+
 </script>
 
 </body>
