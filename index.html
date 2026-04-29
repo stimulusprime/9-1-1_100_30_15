@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Програма лояльності — Аптека 9·1·1</title>
-<meta name="description" content="Найближчі плани розвитку програми лояльності Аптеки 9·1·1: оновлення списків, програма для мам та дітей, прогнози і методологія.">
+<title>Список товарів з підвищеним списанням — Аптека 9·1·1</title>
+<meta name="description" content="Оновлений список товарів з підвищеним списанням бонусів. Методологія, рівні, прогноз.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800;900&family=Raleway:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -29,17 +29,6 @@
   --amber-soft: #f3e3c8;
   --blue: #1a4a78;
   --blue-soft: #d4e1ee;
-  --purple: #5b3789;
-  --purple-soft: #e4d7f0;
-
-  /* Material elevation shadows */
-  --elev-1: 0 1px 2px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.06);
-  --elev-2: 0 2px 6px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.08);
-  --elev-3: 0 4px 12px rgba(0,0,0,0.06), 0 20px 40px rgba(0,0,0,0.10);
-  --elev-4: 0 8px 20px rgba(0,0,0,0.08), 0 32px 64px rgba(0,0,0,0.14);
-  --elev-red: 0 8px 24px rgba(209,0,36,0.18), 0 16px 48px rgba(209,0,36,0.14);
-
-  /* Liquid glass shadows: outer + inner highlight + edge sheen */
   --liquid-glass: 
     0 1px 0 0 rgba(255,255,255,0.9) inset,
     0 -1px 0 0 rgba(255,255,255,0.3) inset,
@@ -50,6 +39,10 @@
     0 -1px 0 0 rgba(255,255,255,0.05) inset,
     0 8px 32px rgba(0,0,0,0.4),
     0 24px 48px rgba(0,0,0,0.3);
+  --elev-1: 0 1px 2px rgba(0,0,0,0.04), 0 2px 6px rgba(0,0,0,0.06);
+  --elev-2: 0 2px 6px rgba(0,0,0,0.05), 0 12px 24px rgba(0,0,0,0.08);
+  --elev-3: 0 4px 12px rgba(0,0,0,0.06), 0 20px 40px rgba(0,0,0,0.10);
+  --elev-4: 0 8px 20px rgba(0,0,0,0.08), 0 32px 64px rgba(0,0,0,0.14);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
@@ -63,14 +56,12 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
-h1, h2, h3, .display { font-family: 'Unbounded', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 0.98; }
+h1, h2, h3 { font-family: 'Unbounded', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.02em; line-height: 0.98; }
 p { font-weight: 500; }
 a { color: inherit; }
-img { max-width: 100%; display: block; }
 .container { max-width: 1320px; margin: 0 auto; padding: 0 40px; position: relative; z-index: 2; }
 @media (max-width: 720px) { .container { padding: 0 24px; } }
 
-/* SCROLL PROGRESS + GRAIN OVERLAY */
 .progress {
   position: fixed; top: 0; left: 0; height: 4px; width: 0%;
   background: linear-gradient(90deg, var(--red), var(--red-deep));
@@ -84,19 +75,13 @@ body::before {
   opacity: 0.7; mix-blend-mode: multiply;
 }
 
-/* ============================================================
-   LIQUID GLASS NAV
-   ============================================================ */
 nav.top {
   position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-  background: 
-    linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(245, 241, 232, 0.4) 100%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(245, 241, 232, 0.4) 100%);
   backdrop-filter: blur(28px) saturate(1.6);
   -webkit-backdrop-filter: blur(28px) saturate(1.6);
   border-bottom: 1px solid rgba(255,255,255,0.5);
-  box-shadow: 
-    0 1px 0 0 rgba(255,255,255,0.8) inset,
-    var(--elev-1);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.8) inset, var(--elev-1);
   transition: transform 0.4s ease;
 }
 nav.top.hide { transform: translateY(-100%); }
@@ -124,25 +109,24 @@ nav.top.hide { transform: translateY(-100%); }
   border-left: 1px solid var(--line); padding-left: 14px;
   line-height: 1.3;
 }
-.nav-links { display: flex; gap: 32px; font-size: 14px; font-weight: 600; }
-.nav-links a {
-  text-decoration: none; color: var(--charcoal); position: relative;
-  padding: 4px 0;
+.nav-pdf {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--ink); color: #fff;
+  padding: 10px 20px; border-radius: 100px;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none;
+  box-shadow: var(--elev-2);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.nav-links a::after {
-  content: ''; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
-  background: var(--red); transition: width 0.3s ease;
+.nav-pdf:hover { transform: translateY(-2px); box-shadow: var(--elev-3); }
+.nav-pdf::before {
+  content: '↓'; font-size: 14px; font-weight: 700;
 }
-.nav-links a:hover { color: var(--red); }
-.nav-links a:hover::after { width: 100%; }
-@media (max-width: 1100px) { .nav-links { display: none; } }
 
-/* ============================================================
-   HERO
-   ============================================================ */
+/* HERO */
 .hero {
-  position: relative; min-height: 100vh;
-  padding: 160px 0 100px;
+  position: relative; min-height: 92vh;
+  padding: 160px 0 80px;
   display: flex; align-items: center;
   overflow: hidden;
   background:
@@ -166,17 +150,13 @@ nav.top.hide { transform: translateY(-100%); }
   border-radius: 50%; filter: blur(80px);
 }
 .hero-orb.o1 {
-  width: 600px; height: 600px;
-  background: var(--red);
-  top: -100px; right: -100px;
-  opacity: 0.15;
+  width: 600px; height: 600px; background: var(--red);
+  top: -100px; right: -100px; opacity: 0.15;
   animation: orbDrift 20s ease-in-out infinite;
 }
 .hero-orb.o2 {
-  width: 500px; height: 500px;
-  background: var(--pink);
-  bottom: -100px; left: -100px;
-  opacity: 0.5;
+  width: 500px; height: 500px; background: var(--pink);
+  bottom: -100px; left: -100px; opacity: 0.5;
   animation: orbDrift 25s ease-in-out infinite reverse;
 }
 @keyframes orbDrift {
@@ -184,8 +164,8 @@ nav.top.hide { transform: translateY(-100%); }
   50% { transform: translate(60px,-40px) scale(1.15); }
 }
 .hero-logo {
-  position: absolute; right: 4%; top: 56%; transform: translateY(-50%);
-  width: clamp(280px, 34vw, 480px);
+  position: absolute; right: 4%; top: 50%; transform: translateY(-50%);
+  width: clamp(280px, 38vw, 540px);
   aspect-ratio: 1;
   filter: drop-shadow(0 32px 64px rgba(209,0,36,0.30)) drop-shadow(0 8px 16px rgba(0,0,0,0.10));
   animation: floatLogo 8s ease-in-out infinite;
@@ -196,21 +176,18 @@ nav.top.hide { transform: translateY(-100%); }
 .hero-logo svg { width: 100%; height: 100%; display: block; }
 @keyframes floatLogo {
   0%, 100% { transform: translateY(-50%) rotate(-3deg); }
-  50% { transform: translateY(-46%) rotate(3deg); }
+  50% { transform: translateY(-54%) rotate(3deg); }
 }
-@media (max-width: 1280px) {
-  .hero-logo { right: -8%; opacity: 0.20; width: 60vw; }
+@media (max-width: 1100px) {
+  .hero-logo { right: -10%; opacity: 0.25; width: 70vw; }
 }
 @media (max-width: 720px) {
   .hero-logo { right: -25%; top: 75%; width: 80vw; opacity: 0.18; }
 }
-
-/* Hero tag — liquid glass pill */
 .hero-tag {
   display: inline-flex; align-items: center; gap: 10px;
   padding: 12px 24px;
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border: 1px solid rgba(255,255,255,0.7);
@@ -219,9 +196,7 @@ nav.top.hide { transform: translateY(-100%); }
   letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--charcoal);
   margin-bottom: 40px;
-  box-shadow: 
-    0 1px 0 0 rgba(255,255,255,0.9) inset,
-    0 8px 24px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 0 0 rgba(255,255,255,0.9) inset, 0 8px 24px rgba(0,0,0,0.06);
 }
 .hero-tag::before {
   content: ''; width: 8px; height: 8px;
@@ -233,65 +208,54 @@ nav.top.hide { transform: translateY(-100%); }
   50% { opacity: 0.7; transform: scale(0.9); box-shadow: 0 0 0 12px rgba(209,0,36,0); }
 }
 .hero h1 {
-  font-size: clamp(44px, 7vw, 96px);
+  font-size: clamp(40px, 6.5vw, 92px);
   margin-bottom: 32px;
   position: relative;
   letter-spacing: -0.04em;
   font-weight: 800;
-  max-width: 720px;
+  max-width: 760px;
 }
-@media (max-width: 1280px) { .hero h1 { max-width: 100%; } }
-.hero h1 .line { display: block; overflow: hidden; }
-.hero h1 .line span {
-  display: inline-block;
-  transform: translateY(110%);
-  animation: heroLineUp 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
-}
-.hero h1 .line:nth-child(2) span { animation-delay: 0.15s; }
-.hero h1 .accent { color: var(--red); position: relative; }
-.hero h1 .accent::after {
-  content: ''; position: absolute; left: 0; bottom: 0.06em;
-  width: 0; height: 0.08em; background: var(--red);
-  animation: heroUnderline 0.8s ease 1.2s forwards;
-}
-@keyframes heroLineUp { to { transform: translateY(0); } }
-@keyframes heroUnderline { to { width: 0.3em; } }
+@media (max-width: 1100px) { .hero h1 { max-width: 100%; } }
+.hero h1 .accent { color: var(--red); }
 .hero p.lede {
-  font-size: clamp(18px, 1.7vw, 24px);
+  font-size: clamp(18px, 1.5vw, 22px);
   max-width: 640px;
   color: var(--charcoal);
-  margin-bottom: 56px;
+  margin-bottom: 40px;
   font-weight: 500;
   line-height: 1.5;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 0.8s forwards;
 }
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
 }
-.scroll-hint {
-  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--muted); font-weight: 600;
-  display: flex; flex-direction: column; align-items: center; gap: 12px;
-  opacity: 0;
-  animation: fadeInUp 0.8s ease 1.5s forwards;
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 18px 32px;
+  border-radius: 100px;
+  font-family: 'Unbounded'; font-weight: 600; font-size: 15px;
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+  letter-spacing: -0.01em;
 }
-.scroll-hint::after {
-  content: ''; width: 1px; height: 36px; background: var(--charcoal);
-  animation: scrollLine 2s ease-in-out infinite;
+.btn-primary {
+  background: var(--ink); color: #fff;
+  box-shadow: var(--elev-2);
 }
-@keyframes scrollLine {
-  0%, 100% { transform: scaleY(1); transform-origin: top; }
-  50% { transform: scaleY(0.4); transform-origin: top; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: var(--elev-4); }
+.btn-primary::after { content: '↓'; font-size: 16px; }
+.btn-secondary {
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: var(--ink);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow: var(--liquid-glass);
 }
+.btn-secondary:hover { transform: translateY(-3px); }
 
-/* ============================================================
-   SECTIONS
-   ============================================================ */
+/* SECTIONS */
 section {
-  padding: 140px 0;
+  padding: 120px 0;
   position: relative;
   overflow: hidden;
 }
@@ -301,7 +265,6 @@ section.dark .eyebrow::before { background: rgba(255,255,255,0.5); }
 section.dark h2 { color: #fff; }
 section.dark .section-lede { color: rgba(255,255,255,0.78); }
 section.cream { background: var(--paper-soft); }
-section.pink { background: var(--pink-bg); }
 
 .eyebrow {
   display: inline-flex; align-items: center; gap: 14px;
@@ -316,18 +279,17 @@ section.pink { background: var(--pink-bg); }
   content: ''; width: 32px; height: 1px; background: var(--red);
 }
 h2 {
-  font-size: clamp(44px, 6.5vw, 96px);
+  font-size: clamp(40px, 5.5vw, 80px);
   margin-bottom: 32px;
-  max-width: 16ch;
+  max-width: 18ch;
   letter-spacing: -0.03em;
 }
-h2.wide { max-width: 22ch; }
 h2.tight { max-width: 12ch; }
 .section-lede {
-  font-size: clamp(18px, 1.5vw, 22px);
+  font-size: clamp(18px, 1.4vw, 21px);
   color: var(--charcoal);
   max-width: 720px;
-  margin-bottom: 80px;
+  margin-bottom: 64px;
   line-height: 1.5;
   font-weight: 500;
 }
@@ -344,371 +306,9 @@ h2.tight { max-width: 12ch; }
 section.dark .section-number { color: rgba(255,255,255,0.05); }
 @media (max-width: 720px) { .section-number { right: 24px; top: 30px; font-size: 90px; } }
 
-/* ============================================================
-   IRIDESCENT GRADIENT — used on selected cards
-   ============================================================ */
-@keyframes iridescentShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-.iridescent {
-  position: relative;
-  isolation: isolate;
-}
-.iridescent::before {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(
-    115deg,
-    rgba(255, 200, 230, 0.45) 0%,
-    rgba(180, 220, 255, 0.45) 25%,
-    rgba(220, 255, 230, 0.45) 50%,
-    rgba(255, 230, 200, 0.45) 75%,
-    rgba(255, 200, 230, 0.45) 100%
-  );
-  background-size: 300% 100%;
-  animation: iridescentShift 12s ease-in-out infinite;
-  border-radius: inherit;
-  z-index: -1;
-  filter: blur(0.5px) saturate(1.4);
-  mix-blend-mode: overlay;
-}
-
-/* ============================================================
-   AAARR section
-   ============================================================ */
-.aaarr-intro {
-  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px;
-  align-items: end; margin-bottom: 80px;
-}
-@media (max-width: 900px) { .aaarr-intro { grid-template-columns: 1fr; gap: 24px; } }
-.aaarr-intro p { font-size: 17px; color: var(--charcoal); line-height: 1.6; font-weight: 500; }
-
-.aaarr-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
-}
-@media (max-width: 1100px) { .aaarr-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .aaarr-grid { grid-template-columns: 1fr; } }
-
-.aaarr-card {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(20px) saturate(1.4);
-  -webkit-backdrop-filter: blur(20px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.8);
-  border-radius: 16px;
-  padding: 36px 28px 32px;
-  position: relative;
-  box-shadow: var(--liquid-glass);
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
-  overflow: hidden;
-  isolation: isolate;
-}
-.aaarr-card::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: var(--red);
-  border-radius: 16px 16px 0 0;
-  z-index: 1;
-}
-.aaarr-card.k-2::after { background: var(--amber); }
-.aaarr-card.k-3::after { background: var(--green); }
-.aaarr-card.k-4::after { background: var(--blue); }
-.aaarr-card.k-5::after { background: var(--purple); }
-.aaarr-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 
-    0 1px 0 0 rgba(255,255,255,0.9) inset,
-    0 16px 48px rgba(0,0,0,0.12),
-    0 32px 64px rgba(0,0,0,0.10);
-}
-.aaarr-letter {
-  font-family: 'Unbounded'; font-weight: 900;
-  font-size: 56px; line-height: 1;
-  color: var(--red); margin-bottom: 8px;
-  letter-spacing: -0.04em;
-}
-.aaarr-card.k-2 .aaarr-letter { color: var(--amber); }
-.aaarr-card.k-3 .aaarr-letter { color: var(--green); }
-.aaarr-card.k-4 .aaarr-letter { color: var(--blue); }
-.aaarr-card.k-5 .aaarr-letter { color: var(--purple); }
-.aaarr-name {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 17px;
-  color: var(--ink); margin-bottom: 6px;
-  letter-spacing: -0.01em;
-}
-.aaarr-en {
-  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 24px;
-}
-.aaarr-card p { font-size: 14px; color: var(--charcoal); line-height: 1.55; font-weight: 500; }
-
-/* ============================================================
-   STATE — current loyalty program metrics
-   ============================================================ */
-.state-grid {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
-  margin-bottom: 56px;
-}
-@media (max-width: 1100px) { .state-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .state-grid { grid-template-columns: 1fr; } }
-
-.state-card {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(16px) saturate(1.4);
-  -webkit-backdrop-filter: blur(16px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.8);
-  border-radius: 20px;
-  padding: 36px 28px;
-  box-shadow: var(--liquid-glass);
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.state-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 
-    0 1px 0 0 rgba(255,255,255,0.9) inset,
-    0 16px 40px rgba(0,0,0,0.10),
-    0 24px 60px rgba(0,0,0,0.10);
-}
-.state-card::after {
-  content: ''; position: absolute; right: -40px; bottom: -40px;
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(209,0,36,0.10) 0%, transparent 70%);
-  pointer-events: none;
-}
-.state-label {
-  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 16px;
-}
-.state-big {
-  font-family: 'Unbounded'; font-weight: 800;
-  font-size: clamp(40px, 4.5vw, 56px); line-height: 1;
-  color: var(--ink); margin-bottom: 12px; letter-spacing: -0.03em;
-  display: block;
-}
-.state-sub {
-  font-size: 13px; color: var(--muted); line-height: 1.5; font-weight: 500;
-}
-.state-card.accent .state-big { color: var(--red); }
-
-.state-paragraph {
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.5) 100%);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 20px;
-  padding: 40px 48px;
-  font-size: 17px;
-  line-height: 1.65;
-  color: var(--charcoal);
-  font-weight: 500;
-  box-shadow: var(--liquid-glass);
-}
-.state-paragraph p + p { margin-top: 14px; }
-.state-paragraph b { color: var(--ink); font-weight: 700; }
-.state-paragraph .highlight { color: var(--red); font-weight: 700; }
-
-/* AVG CHECK comparison — special card */
-.avg-check {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  margin-top: 40px;
-  margin-bottom: 56px;
-}
-@media (max-width: 720px) { .avg-check { grid-template-columns: 1fr; } }
-.avg-check-card {
-  padding: 40px 36px;
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.avg-check-card.no-loy {
-  background: rgba(255,255,255,0.6);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.7);
-  box-shadow: var(--liquid-glass);
-}
-.avg-check-card.with-loy {
-  background: linear-gradient(135deg, var(--green) 0%, #0a5728 100%);
-  color: #fff;
-  box-shadow: var(--elev-3), 0 16px 40px rgba(14,107,52,0.25);
-}
-.ac-label {
-  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 14px;
-}
-.avg-check-card.with-loy .ac-label { color: rgba(255,255,255,0.7); }
-.ac-value {
-  font-family: 'Unbounded'; font-weight: 800;
-  font-size: clamp(48px, 6vw, 84px); line-height: 1;
-  color: var(--ink); margin-bottom: 16px; letter-spacing: -0.04em;
-}
-.avg-check-card.with-loy .ac-value { color: #fff; }
-.ac-meta {
-  font-size: 14px; color: var(--muted); line-height: 1.55;
-}
-.avg-check-card.with-loy .ac-meta { color: rgba(255,255,255,0.85); }
-.ac-diff {
-  display: inline-block;
-  margin-top: 16px;
-  background: rgba(255,255,255,0.2);
-  padding: 6px 14px; border-radius: 100px;
-  font-family: 'Unbounded'; font-weight: 700; font-size: 14px;
-  color: #fff;
-}
-
-/* ============================================================
-   FEEDBACK — comparison bars
-   ============================================================ */
-.feedback-grid {
-  display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px;
-  align-items: center; margin-bottom: 56px;
-}
-@media (max-width: 900px) { .feedback-grid { grid-template-columns: 1fr; gap: 32px; } }
-
-.feedback-bars {
-  display: flex; flex-direction: column; gap: 28px;
-}
-.fb-row {
-  display: grid; grid-template-columns: 100px 1fr auto; gap: 16px; align-items: center;
-}
-.fb-month {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 16px;
-  color: var(--charcoal);
-}
-.fb-bar-track {
-  height: 56px; background: var(--soft); border-radius: 12px;
-  position: relative; overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.06);
-}
-.fb-bar-fill {
-  position: absolute; top: 0; left: 0; bottom: 0;
-  background: linear-gradient(90deg, var(--red-deep), var(--red));
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(209,0,36,0.25);
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 1.4s cubic-bezier(0.65, 0, 0.35, 1);
-}
-.fb-row.in .fb-bar-fill { transform: scaleX(1); }
-.fb-bar-fill.green { background: linear-gradient(90deg, #0a4f25, var(--green)); box-shadow: 0 4px 12px rgba(14,107,52,0.25); }
-.fb-value {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 22px;
-  color: var(--ink); letter-spacing: -0.02em;
-  min-width: 80px; text-align: right;
-}
-.fb-pct { font-size: 13px; color: var(--muted); margin-left: 8px; font-weight: 600; }
-
-.feedback-takeaway {
-  background: 
-    linear-gradient(135deg, var(--green-soft) 0%, rgba(255,255,255,0.6) 100%);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 20px;
-  padding: 32px 36px;
-  box-shadow: var(--liquid-glass);
-  position: relative; overflow: hidden;
-}
-.feedback-takeaway h3 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 22px;
-  color: var(--green); margin-bottom: 12px;
-}
-.feedback-takeaway p { font-size: 15px; color: var(--charcoal); line-height: 1.6; font-weight: 500; }
-.feedback-takeaway p + p { margin-top: 10px; }
-
-/* ============================================================
-   MARKETING BUDGET REFRAMING — iridescent feature card
-   ============================================================ */
-.budget-card {
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.4) 100%);
-  backdrop-filter: blur(20px) saturate(1.5);
-  -webkit-backdrop-filter: blur(20px) saturate(1.5);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 24px;
-  padding: 64px 56px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: var(--liquid-glass);
-  isolation: isolate;
-}
-@media (max-width: 720px) { .budget-card { padding: 40px 32px; } }
-.budget-card::before {
-  content: ''; position: absolute; inset: 0;
-  background: 
-    linear-gradient(
-      115deg,
-      rgba(255, 130, 200, 0.55) 0%,
-      rgba(130, 200, 255, 0.55) 25%,
-      rgba(200, 255, 200, 0.55) 50%,
-      rgba(255, 220, 130, 0.55) 75%,
-      rgba(255, 130, 200, 0.55) 100%
-    );
-  background-size: 300% 100%;
-  animation: iridescentShift 10s ease-in-out infinite;
-  z-index: -1;
-  border-radius: inherit;
-  mix-blend-mode: overlay;
-  opacity: 0.8;
-}
-.budget-card::after {
-  content: ''; position: absolute; inset: 0;
-  background: 
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(255,150,210,0.4) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 60% at 0% 100%, rgba(150,210,255,0.4) 0%, transparent 60%);
-  z-index: -1;
-  border-radius: inherit;
-  pointer-events: none;
-}
-.budget-pretitle {
-  font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--red); font-weight: 700; margin-bottom: 24px;
-  display: inline-flex; align-items: center; gap: 14px;
-}
-.budget-pretitle::before {
-  content: ''; width: 32px; height: 1px; background: var(--red);
-}
-.budget-card h3 {
-  font-family: 'Unbounded'; font-weight: 700;
-  font-size: clamp(28px, 3.5vw, 44px);
-  margin-bottom: 24px; color: var(--ink);
-  letter-spacing: -0.02em; line-height: 1.15;
-  max-width: 22ch;
-}
-.budget-card p {
-  font-size: 17px; color: var(--charcoal); line-height: 1.65; font-weight: 500;
-  max-width: 70ch;
-}
-.budget-card p + p { margin-top: 14px; }
-.budget-card b { color: var(--ink); font-weight: 700; }
-.budget-points {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  margin-top: 40px;
-}
-@media (max-width: 900px) { .budget-points { grid-template-columns: 1fr; gap: 16px; } }
-.budget-point {
-  background: rgba(255,255,255,0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.8);
-  border-radius: 14px;
-  padding: 24px 24px;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 4px 12px rgba(0,0,0,0.04);
-}
-.budget-point h4 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 15px;
-  color: var(--ink); margin-bottom: 8px;
-}
-.budget-point p { font-size: 14px; color: var(--charcoal); line-height: 1.5; font-weight: 500; max-width: none; }
-
-/* ============================================================
-   LIST UPDATE
-   ============================================================ */
+/* CONTEXT + METHODOLOGY (combined section) */
 .context-card {
-  background: 
-    linear-gradient(135deg, var(--blue-soft) 0%, rgba(255,255,255,0.5) 100%);
+  background: linear-gradient(135deg, var(--blue-soft) 0%, rgba(255,255,255,0.5) 100%);
   backdrop-filter: blur(14px) saturate(1.4);
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border: 1px solid rgba(255,255,255,0.7);
@@ -734,7 +334,6 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 
 .methodology {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  margin-bottom: 56px;
 }
 @media (max-width: 900px) { .methodology { grid-template-columns: 1fr; } }
 .method-card {
@@ -743,36 +342,35 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
   -webkit-backdrop-filter: blur(14px) saturate(1.4);
   border: 1px solid rgba(255,255,255,0.8);
   border-radius: 20px;
-  padding: 40px 32px;
+  padding: 36px 28px;
   box-shadow: var(--liquid-glass);
-  position: relative;
   transition: transform 0.4s, box-shadow 0.4s;
 }
 .method-card:hover { transform: translateY(-6px); box-shadow: var(--elev-3); }
 .method-num {
-  width: 48px; height: 48px; border-radius: 50%;
+  width: 44px; height: 44px; border-radius: 50%;
   background: linear-gradient(135deg, var(--red), var(--red-deep));
   color: #fff;
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Unbounded'; font-weight: 800; font-size: 18px;
-  margin-bottom: 24px;
+  font-family: 'Unbounded'; font-weight: 800; font-size: 17px;
+  margin-bottom: 20px;
   box-shadow: 0 4px 12px rgba(209,0,36,0.30), 0 1px 0 rgba(255,255,255,0.3) inset;
 }
 .method-card h4 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 19px;
+  font-family: 'Unbounded'; font-weight: 700; font-size: 18px;
   margin-bottom: 12px; line-height: 1.25;
 }
-.method-card p { font-size: 15px; color: var(--charcoal); line-height: 1.6; font-weight: 500; }
+.method-card p { font-size: 14px; color: var(--charcoal); line-height: 1.6; font-weight: 500; }
 
 /* TIERS */
 .tiers {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
-  margin-bottom: 40px;
+  margin-bottom: 56px;
 }
 @media (max-width: 1100px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
 .tier {
-  padding: 40px 28px 36px;
+  padding: 36px 24px 32px;
   background: var(--green-soft);
   border-radius: 20px;
   position: relative;
@@ -799,8 +397,8 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 .tier:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--elev-4); }
 .tier-rate {
   font-family: 'Unbounded'; font-weight: 900;
-  font-size: clamp(48px, 5.5vw, 76px);
-  color: var(--green); line-height: 0.95; margin-bottom: 12px;
+  font-size: clamp(44px, 5vw, 68px);
+  color: var(--green); line-height: 0.95; margin-bottom: 8px;
   letter-spacing: -0.04em;
   position: relative; z-index: 1;
 }
@@ -808,23 +406,23 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 .tier.t-3 .tier-rate { color: var(--blue); }
 .tier.t-4 .tier-rate { color: var(--red); }
 .tier-count {
-  font-weight: 700; font-size: 14px; color: var(--green); margin-bottom: 28px;
+  font-weight: 700; font-size: 13px; color: var(--green); margin-bottom: 20px;
   letter-spacing: 0.02em; position: relative; z-index: 1;
 }
 .tier.t-2 .tier-count { color: var(--amber); }
 .tier.t-3 .tier-count { color: var(--blue); }
 .tier.t-4 .tier-count { color: var(--red); }
 .tier h3 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 19px;
-  margin-bottom: 14px; color: var(--ink);
+  font-family: 'Unbounded'; font-weight: 700; font-size: 17px;
+  margin-bottom: 12px; color: var(--ink);
   position: relative; z-index: 1;
 }
-.tier p { color: var(--charcoal); font-size: 14px; line-height: 1.55; position: relative; z-index: 1; font-weight: 500; }
+.tier p { color: var(--charcoal); font-size: 13px; line-height: 1.55; position: relative; z-index: 1; font-weight: 500; }
 
 /* CLIENT EXAMPLE */
 .client-cards {
   display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 @media (max-width: 900px) { .client-cards { grid-template-columns: 1fr; } }
 .client-card {
@@ -833,9 +431,8 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
   -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255,255,255,0.8);
   border-radius: 20px;
-  padding: 48px 40px;
+  padding: 40px 36px;
   position: relative;
-  overflow: hidden;
   box-shadow: var(--liquid-glass);
 }
 .client-card.highlight {
@@ -845,16 +442,15 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 }
 .client-card.highlight .client-label,
 .client-card.highlight .client-eyebrow { color: rgba(255,255,255,0.7); }
-.client-card.highlight .client-value,
-.client-card.highlight .client-value.discount { color: #fff; }
+.client-card.highlight .client-value { color: #fff; }
 .client-card.highlight .client-pct { color: rgba(255,255,255,0.8); }
 .client-eyebrow {
   font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--muted); font-weight: 700; margin-bottom: 28px;
+  color: var(--muted); font-weight: 700; margin-bottom: 24px;
 }
 .client-row {
   display: grid; grid-template-columns: auto 1fr;
-  gap: 16px 24px;
+  gap: 14px 24px;
   align-items: baseline;
 }
 .client-label {
@@ -862,22 +458,22 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 }
 .client-value {
   font-family: 'Unbounded'; font-weight: 800;
-  font-size: clamp(36px, 4.5vw, 56px); line-height: 1; color: var(--ink);
+  font-size: clamp(32px, 4vw, 50px); line-height: 1; color: var(--ink);
   letter-spacing: -0.04em;
 }
 .client-pct {
-  display: inline-block; font-size: 16px; color: var(--muted);
-  margin-left: 10px;
+  display: inline-block; font-size: 15px; color: var(--muted);
+  margin-left: 8px;
   font-family: 'Raleway'; font-weight: 600;
 }
 .client-final {
-  margin-top: 28px; padding-top: 28px;
+  margin-top: 24px; padding-top: 24px;
   border-top: 1px solid var(--line);
 }
 .client-card.highlight .client-final { border-color: rgba(255,255,255,0.2); }
 .client-takeaway {
   font-family: 'Unbounded'; font-weight: 600;
-  font-size: clamp(22px, 2.4vw, 32px); line-height: 1.25;
+  font-size: clamp(20px, 2.2vw, 28px); line-height: 1.25;
   text-align: center; max-width: 900px; margin: 0 auto;
   letter-spacing: -0.02em; color: var(--charcoal);
 }
@@ -885,20 +481,23 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
   font-style: normal; color: var(--red);
 }
 
-/* FORECAST (dark with iridescent glass) */
+/* FORECAST (dark with iridescent) */
 .forecast-grid {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 @media (max-width: 1000px) { .forecast-grid { grid-template-columns: 1fr; } }
+@keyframes iridescentShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
 .forecast-card {
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 20px;
-  padding: 48px 32px;
+  padding: 44px 28px;
   position: relative;
   overflow: hidden;
   box-shadow: var(--liquid-glass-dark);
@@ -907,15 +506,12 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 }
 .forecast-card::before {
   content: ''; position: absolute; inset: 0;
-  background: 
-    linear-gradient(
-      115deg,
-      rgba(255, 80, 180, 0.30) 0%,
-      rgba(80, 180, 255, 0.30) 25%,
-      rgba(180, 255, 200, 0.30) 50%,
-      rgba(255, 200, 80, 0.30) 75%,
-      rgba(255, 80, 180, 0.30) 100%
-    );
+  background: linear-gradient(115deg,
+    rgba(255, 80, 180, 0.30) 0%,
+    rgba(80, 180, 255, 0.30) 25%,
+    rgba(180, 255, 200, 0.30) 50%,
+    rgba(255, 200, 80, 0.30) 75%,
+    rgba(255, 80, 180, 0.30) 100%);
   background-size: 300% 100%;
   animation: iridescentShift 14s ease-in-out infinite;
   z-index: -1;
@@ -933,7 +529,7 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 .forecast-card.fc-3::after { background: linear-gradient(90deg, var(--blue), #2e6a9e); }
 .forecast-big {
   font-family: 'Unbounded'; font-weight: 900;
-  font-size: clamp(40px, 4.8vw, 64px); line-height: 0.95;
+  font-size: clamp(38px, 4.6vw, 60px); line-height: 0.95;
   color: var(--amber); margin-bottom: 14px; letter-spacing: -0.04em;
   display: block;
   word-break: break-word;
@@ -941,124 +537,36 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 }
 .forecast-card.fc-2 .forecast-big { color: #5fce8b; }
 .forecast-card.fc-3 .forecast-big { color: #6cb3e0; }
-.forecast-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px; font-weight: 500; }
+.forecast-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 18px; font-weight: 500; }
 .forecast-headline {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 19px;
-  color: #fff; margin-bottom: 16px; line-height: 1.2;
+  font-family: 'Unbounded'; font-weight: 700; font-size: 18px;
+  color: #fff; margin-bottom: 14px; line-height: 1.2;
 }
 .forecast-detail {
   font-size: 14px; color: rgba(255,255,255,0.78); line-height: 1.55; font-weight: 500;
 }
 .disclaimer {
   background: rgba(255,255,255,0.05); border-left: 4px solid var(--red);
-  padding: 32px 40px; font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.6; font-weight: 500;
+  padding: 28px 36px; font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.6; font-weight: 500;
   border-radius: 0 12px 12px 0;
 }
 .disclaimer b { font-weight: 700; color: #fff; }
 
-/* MAMS */
-.mams-hero {
-  padding: 80px 64px;
-  background: 
-    linear-gradient(135deg, rgba(255,209,220,0.8) 0%, rgba(255,245,247,0.6) 100%);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: 24px;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 64px;
-  box-shadow: var(--liquid-glass);
-}
-@media (max-width: 720px) { .mams-hero { padding: 56px 32px; } }
-.mams-hero::before {
-  content: ''; position: absolute;
-  right: -150px; top: -150px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(209,0,36,0.18) 0%, transparent 70%);
-  border-radius: 50%;
-  animation: orbDrift 18s ease-in-out infinite;
-}
-.mams-headline {
-  display: flex; align-items: baseline; gap: 32px; flex-wrap: wrap;
-  margin-bottom: 24px; position: relative;
-}
-.mams-percent {
-  font-family: 'Unbounded'; font-weight: 900;
-  font-size: clamp(120px, 18vw, 240px); line-height: 0.85;
-  color: var(--red); letter-spacing: -0.06em;
-  text-shadow: 0 8px 32px rgba(209,0,36,0.25);
-}
-.mams-text {
-  font-family: 'Unbounded'; font-weight: 700;
-  font-size: clamp(28px, 4vw, 56px); line-height: 1.05;
-  color: var(--ink); letter-spacing: -0.03em;
-}
-.mams-sub {
-  font-size: clamp(17px, 1.5vw, 21px);
-  color: var(--charcoal); max-width: 720px;
-  position: relative;
-  line-height: 1.55;
-  font-weight: 500;
-}
-.mams-features {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-  margin-bottom: 40px;
-}
-@media (max-width: 1000px) { .mams-features { grid-template-columns: 1fr; } }
-.mams-feature {
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(14px) saturate(1.4);
-  -webkit-backdrop-filter: blur(14px) saturate(1.4);
-  border: 1px solid rgba(255,255,255,0.8);
-  padding: 36px 32px;
-  border-radius: 20px;
-  position: relative;
-  transition: transform 0.4s, box-shadow 0.4s;
-  box-shadow: var(--liquid-glass);
-}
-.mams-feature:hover { transform: translateY(-6px); box-shadow: var(--elev-3); }
-.mams-feature::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
-  background: var(--red);
-  border-radius: 4px 0 0 4px;
-}
-.mams-feature.f-2::before { background: var(--green); }
-.mams-feature.f-3::before { background: var(--blue); }
-.mams-feature h4 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 20px;
-  margin-bottom: 14px;
-}
-.mams-feature p { color: var(--charcoal); font-size: 15px; line-height: 1.6; font-weight: 500; }
-.mams-bar {
-  background: var(--ink); color: #fff;
-  padding: 32px 48px;
-  border-radius: 20px;
-  display: flex; flex-wrap: wrap; gap: 24px 48px;
-  align-items: center; justify-content: center;
-  font-size: 16px;
-  text-align: center;
-  box-shadow: var(--elev-3);
-  font-weight: 500;
-}
-.mams-bar b { font-weight: 700; color: #fff; font-family: 'Unbounded'; font-size: 18px; }
-.mams-bar span { color: rgba(255,255,255,0.7); }
-
-/* SUMMARY */
-.summary-card {
-  background: 
-    linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,247,238,0.7) 100%);
+/* PDF CTA */
+.pdf-cta {
+  background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(250,247,238,0.7) 100%);
   backdrop-filter: blur(20px) saturate(1.5);
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid rgba(255,255,255,0.8);
   border-radius: 24px;
-  padding: 64px 56px;
+  padding: 56px 48px;
   box-shadow: var(--liquid-glass);
-  position: relative;
-  overflow: hidden;
+  display: grid; grid-template-columns: 1fr auto; gap: 40px;
+  align-items: center;
+  position: relative; overflow: hidden;
 }
-@media (max-width: 720px) { .summary-card { padding: 40px 32px; } }
-.summary-card::before {
+@media (max-width: 720px) { .pdf-cta { grid-template-columns: 1fr; padding: 36px 28px; } }
+.pdf-cta::before {
   content: ''; position: absolute;
   right: -100px; top: -100px;
   width: 400px; height: 400px;
@@ -1066,27 +574,16 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
   border-radius: 50%;
   pointer-events: none;
 }
-.summary-list { list-style: none; }
-.summary-list li {
-  padding: 24px 0;
-  border-bottom: 1px solid var(--line);
-  display: grid; grid-template-columns: 60px 1fr; gap: 24px;
-  align-items: start;
+.pdf-cta-text h3 {
+  font-family: 'Unbounded'; font-weight: 700;
+  font-size: clamp(24px, 2.6vw, 32px);
+  margin-bottom: 12px; color: var(--ink);
+  letter-spacing: -0.02em; line-height: 1.2;
 }
-.summary-list li:last-child { border-bottom: none; }
-.summary-list li b {
-  font-family: 'Unbounded'; font-weight: 800; font-size: 28px;
-  color: var(--red); line-height: 1; letter-spacing: -0.02em;
-}
-.summary-list li h4 {
-  font-family: 'Unbounded'; font-weight: 700; font-size: 19px;
-  margin-bottom: 8px; line-height: 1.25; color: var(--ink);
-}
-.summary-list li p { font-size: 15px; color: var(--charcoal); line-height: 1.6; font-weight: 500; }
+.pdf-cta-text p { font-size: 15px; color: var(--charcoal); line-height: 1.55; font-weight: 500; }
 
-/* FOOTER */
 footer {
-  padding: 80px 0;
+  padding: 64px 0;
   background: #fff;
   text-align: center;
   font-size: 14px;
@@ -1094,9 +591,9 @@ footer {
   border-top: 1px solid var(--line);
   font-weight: 500;
 }
-footer .logo { justify-content: center; margin-bottom: 24px; }
+footer .logo { justify-content: center; margin-bottom: 20px; }
 
-/* REVEAL ANIMATIONS */
+/* REVEAL */
 .reveal {
   opacity: 0; transform: translateY(40px);
   transition: opacity 1s cubic-bezier(0.65, 0, 0.35, 1), transform 1s cubic-bezier(0.65, 0, 0.35, 1);
@@ -1107,8 +604,6 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
 .stagger.in > *:nth-child(2) { transition-delay: 0.15s; }
 .stagger.in > *:nth-child(3) { transition-delay: 0.25s; }
 .stagger.in > *:nth-child(4) { transition-delay: 0.35s; }
-.stagger.in > *:nth-child(5) { transition-delay: 0.45s; }
-.stagger.in > *:nth-child(6) { transition-delay: 0.55s; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   * { animation: none !important; }
@@ -1132,25 +627,17 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
 <path d="M12.4372 12.4018C15.6456 12.1545 17.0188 14.3542 16.1424 17.3225C16.0933 17.4889 15.835 18.229 15.7613 18.3122C15.682 18.4017 15.6686 18.3811 15.5695 18.3558C15.2335 18.2702 14.2003 17.481 13.9475 17.5562C13.0243 18.9057 11.9602 20.2099 10.5743 21.1093C6.522 23.7384 2.49269 21.8676 5.49902 16.9477C6.93245 14.6022 9.63846 12.6173 12.4372 12.4018Z" fill="#ED1A3B"/>
 <path d="M53.5492 18.245H56.9829V17.5532C56.9829 17.0663 56.7523 16.6563 56.3167 16.2976C55.8554 15.9388 55.3173 15.7595 54.6511 15.7595C54.0105 15.7595 53.4724 15.9388 53.0368 16.2463C52.6011 16.5794 52.3705 16.9894 52.3449 17.4507H49.3468C49.4493 16.1182 50.0387 14.9907 51.0637 14.1195C52.0886 13.2483 53.3699 12.8127 54.9073 12.8127C56.4448 12.8127 57.7004 13.2739 58.7254 14.1451C59.7503 15.0164 60.2628 16.1438 60.2628 17.4763V22.5243C60.2628 22.8062 60.3397 23.0368 60.5191 23.2162C60.6728 23.4212 60.9034 23.498 61.1597 23.498C61.3647 23.498 61.5697 23.4468 61.8003 23.293V25.548C61.2366 25.9067 60.5959 26.0861 59.8785 26.0861C58.6485 26.0861 57.7773 25.5992 57.2904 24.6255C56.291 25.6505 55.0098 26.163 53.4467 26.163C52.1143 26.163 51.0124 25.8042 50.1412 25.0355C49.27 24.2668 48.8344 23.293 48.8344 22.0631C48.8344 20.8843 49.2443 19.9619 50.0899 19.27C50.9356 18.6038 52.0886 18.245 53.5492 18.245ZM52.1143 21.9349C52.1143 22.3193 52.268 22.6268 52.6268 22.883C52.9599 23.1393 53.3955 23.2418 53.9592 23.2418C54.728 23.2418 55.4198 23.0112 56.0348 22.4987C56.6498 22.0118 56.9573 21.3968 56.9829 20.6537H54.1386C53.5236 20.6537 53.0368 20.7818 52.678 21.0125C52.2936 21.2431 52.1143 21.5506 52.1143 21.9349ZM63.9167 13.1202H75.8064V25.8555H72.5265V15.7082H67.1966V25.8555H63.9167V13.1202ZM89.6634 15.7082H85.4354V25.8555H82.1555V15.7082H77.9531V13.1202H89.6634V15.7082ZM97.3585 12.8127C99.0754 12.8127 100.485 13.3508 101.587 14.427C102.663 15.5032 103.227 16.8613 103.227 18.5013C103.227 19.1675 103.098 19.8594 102.842 20.5256H94.1299C94.3092 21.3712 94.6936 22.0374 95.3086 22.5243C95.8979 23.0368 96.6667 23.2674 97.5891 23.2674C98.3579 23.2674 98.9985 23.1137 99.511 22.7549C100.023 22.4218 100.305 21.9862 100.357 21.4737H103.278C103.15 22.8318 102.535 23.9336 101.407 24.8049C100.28 25.6761 98.896 26.1117 97.2816 26.1117C95.3598 26.1117 93.7967 25.4967 92.618 24.2411C91.4393 23.0112 90.8499 21.4225 90.8499 19.5006C90.8499 17.5532 91.4649 15.9645 92.6949 14.7089C93.9249 13.4533 95.4623 12.8127 97.3585 12.8127ZM94.258 18.0144H100.203C100.049 17.2969 99.7416 16.7332 99.2547 16.2976C98.7422 15.862 98.1273 15.6313 97.3841 15.6313C96.6154 15.6313 95.9748 15.862 95.4367 16.2719C94.873 16.7076 94.4886 17.2969 94.258 18.0144ZM105.88 13.1202H109.16V18.04H110.057C110.672 18.04 111.133 17.7838 111.441 17.2457L113.132 14.6576C113.747 13.5558 114.67 12.992 115.9 12.992H117.283V15.5801H117.181C116.515 15.5801 116.028 15.862 115.72 16.4001L113.85 19.2956L116.053 22.5755C116.361 23.1393 116.848 23.3955 117.514 23.3955H117.591V25.9836H116.31C115.72 25.9836 115.182 25.8555 114.67 25.548C114.157 25.2661 113.747 24.8561 113.465 24.3436L111.441 21.4481C111.082 20.91 110.621 20.6281 110.006 20.6281H109.16V25.8555H105.88V13.1202ZM124.016 18.245H127.45V17.5532C127.45 17.0663 127.219 16.6563 126.784 16.2976C126.322 15.9388 125.784 15.7595 125.118 15.7595C124.478 15.7595 123.939 15.9388 123.504 16.2463C123.068 16.5794 122.838 16.9894 122.812 17.4507H119.814C119.916 16.1182 120.506 14.9907 121.531 14.1195C122.556 13.2483 123.837 12.8127 125.374 12.8127C126.912 12.8127 128.167 13.2739 129.192 14.1451C130.217 15.0164 130.73 16.1438 130.73 17.4763V22.5243C130.73 22.8062 130.807 23.0368 130.986 23.2162C131.14 23.4212 131.37 23.498 131.627 23.498C131.832 23.498 132.037 23.4468 132.267 23.293V25.548C131.704 25.9067 131.063 26.0861 130.346 26.0861C129.116 26.0861 128.244 25.5992 127.757 24.6255C126.758 25.6505 125.477 26.163 123.914 26.163C122.581 26.163 121.479 25.8042 120.608 25.0355C119.737 24.2668 119.301 23.293 119.301 22.0631C119.301 20.8843 119.711 19.9619 120.557 19.27C121.403 18.6038 122.556 18.245 124.016 18.245ZM122.581 21.9349C122.581 22.3193 122.735 22.6268 123.094 22.883C123.427 23.1393 123.863 23.2418 124.426 23.2418C125.195 23.2418 125.887 23.0112 126.502 22.4987C127.117 22.0118 127.424 21.3968 127.45 20.6537H124.606C123.991 20.6537 123.504 20.7818 123.145 21.0125C122.761 21.2431 122.581 21.5506 122.581 21.9349Z" fill="black"/>
 </svg></span>
-      <span class="logo-text">Програма<br>лояльності</span>
+      <span class="logo-text">Підвищене<br>списання</span>
     </a>
-    <div class="nav-links">
-      <a href="#aaarr">Цілі</a>
-      <a href="#state">Зараз</a>
-      <a href="#feedback">Відгуки</a>
-      <a href="#budget">Бюджет</a>
-      <a href="#lists">Списки</a>
-      <a href="#mams">Мами</a>
-      <a href="#summary">Підсумок</a>
-    </div>
+    <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="nav-pdf" target="_blank">PDF зі списком</a>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="hero-grid"></div>
-  <div class="hero-orb o1" data-parallax="0.3"></div>
-  <div class="hero-orb o2" data-parallax="0.2"></div>
-  <div class="hero-logo" data-parallax="0.15"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <div class="hero-logo"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M38.0894 12.226L34.751 15.4732C34.6702 15.7838 35.9832 16.6007 35.961 16.9716L33.5252 22.4905L35.9563 23.4778L39.3057 16.0278C42.9412 35.2012 19.7471 47.5886 5.9136 33.8209C9.36604 30.6688 12.87 27.3708 15.6354 23.5793C17.7638 20.6617 20.0696 16.7608 18.4769 13.0865C16.7361 9.07225 11.8098 9.19507 8.39457 10.8654C4.77414 12.6372 0.231373 18.0912 2.35022 22.2901C4.14816 25.8526 8.89615 25.2465 11.7646 23.4351C12.2971 23.0991 12.7305 22.6458 13.2907 22.3764C10.5507 25.8083 7.47382 28.9596 4.1648 31.8439C-6.57367 17.863 4.87715 -1.88249 22.2963 0.144432C29.4824 0.9804 35.3184 5.70303 38.0886 12.2252L38.0894 12.226ZM25.5379 24.4683L30.316 13.7664L30.2598 13.3987C29.7954 13.1911 28.7606 12.0294 28.3723 11.9328C28.0886 11.8622 24.6837 15.5746 24.1774 16.0048C24.1116 16.2552 24.66 16.5563 24.8176 16.7101C24.9642 16.8527 25.6885 17.5334 25.6782 17.6483L23.1227 23.3685L25.5379 24.4683ZM33.3628 18.527C33.4246 18.42 33.3192 18.3083 33.2709 18.2204C33.1258 17.9589 32.4333 17.0445 32.2217 16.8361C32.1702 16.7853 32.1512 16.6998 32.045 16.7109L30.0965 18.1245C30.0759 18.2608 31.3327 19.8725 31.4444 19.8931L33.3628 18.5262V18.527ZM20.8327 20.8075C20.9072 20.8503 20.9793 20.8123 21.049 20.779C21.1996 20.7077 22.8493 19.4398 22.8684 19.3249L21.5427 17.5492L19.6124 19.046L20.8327 20.8083V20.8075Z" fill="#ED1A3B"/>
 <path d="M5.91382 33.8162C5.1761 33.0817 4.81557 32.6871 4.16422 31.8392C7.47324 28.9542 10.5501 25.8036 13.2902 22.3718C12.73 22.642 12.2965 23.0945 11.764 23.4304C8.89558 25.2418 4.14679 25.8472 2.34965 22.2854C0.230798 18.0866 4.77357 12.6326 8.39479 10.8616C11.81 9.19124 16.7371 9.06843 18.4772 13.0827C20.0699 16.757 17.764 20.6579 15.6356 23.5754C12.8702 27.3662 9.36547 30.6641 5.91382 33.817V33.8162ZM12.4399 12.3957C9.64122 12.6112 6.93521 14.5969 5.50177 16.9416C2.49545 21.8615 6.52475 23.7315 10.577 21.1032C11.9629 20.2038 13.0279 18.8996 13.9502 17.5501C14.203 17.4749 15.2363 18.2641 15.5723 18.3497C15.6713 18.375 15.6848 18.3956 15.764 18.3061C15.8377 18.2229 16.096 17.4828 16.1452 17.3164C17.0215 14.3481 15.6483 12.1484 12.4399 12.3957Z" fill="#FFFDFD"/>
 <path d="M39.3039 16.0284L35.9545 23.4785L33.5234 22.4911L35.9592 16.9722C35.9806 16.6013 34.6676 15.7836 34.7493 15.4738L38.0876 12.2266C38.6629 13.5815 39.021 14.5316 39.3047 16.0284H39.3039Z" fill="#FFFDFD"/>
@@ -1160,193 +647,26 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
 <path d="M12.4372 12.4018C15.6456 12.1545 17.0188 14.3542 16.1424 17.3225C16.0933 17.4889 15.835 18.229 15.7613 18.3122C15.682 18.4017 15.6686 18.3811 15.5695 18.3558C15.2335 18.2702 14.2003 17.481 13.9475 17.5562C13.0243 18.9057 11.9602 20.2099 10.5743 21.1093C6.522 23.7384 2.49269 21.8676 5.49902 16.9477C6.93245 14.6022 9.63846 12.6173 12.4372 12.4018Z" fill="#ED1A3B"/>
 </svg></div>
   <div class="container">
-    <span class="hero-tag">Найближчі плани · Квітень 2026</span>
-    <h1>
-      <span class="line"><span>Програма</span></span>
-      <span class="line"><span><em class="accent" style="font-style:normal;">лояльності</em></span></span>
-    </h1>
-    <p class="lede">Як вона працює зараз, що ми оновлюємо й куди рухаємось далі.</p>
+    <span class="hero-tag">Квітень 2026 · готово до запуску</span>
+    <h1>Список товарів з <span class="accent">підвищеним списанням</span></h1>
+    <p class="lede">Як ми обрали 346 нових товарів для розширеної програми списання бонусів і чого від цього очікувати.</p>
+    <div class="hero-actions">
+      <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="btn btn-primary" target="_blank">Завантажити PDF зі списком</a>
+      <a href="#methodology" class="btn btn-secondary">Як це працює</a>
+    </div>
   </div>
-  <div class="scroll-hint">Гортай далі</div>
 </header>
 
-<section id="aaarr" class="cream">
+<section id="methodology" class="cream">
   <div class="section-number">01</div>
   <div class="container">
-    <span class="eyebrow reveal">Цілі програми</span>
-    <h2 class="reveal">AAARR — на що працює лояльність</h2>
-
-    <div class="aaarr-intro">
-      <p class="reveal">Кожен елемент програми лояльності — від нарахування бонусів до оновлення списків — спрямований на одну з п'яти класичних метрик AAARR. Це не теоретична рамка, а спосіб впорядкувати, що саме ми робимо й навіщо.</p>
-    </div>
-
-    <div class="aaarr-grid stagger">
-      <div class="aaarr-card reveal">
-        <div class="aaarr-letter">A</div>
-        <div class="aaarr-name">Залучення</div>
-        <div class="aaarr-en">Acquisition</div>
-        <p>Сама наявність бонусної програми — привід обрати нас, а не сусідню аптеку. Реклама дисконтної карти, оформлення в чеку, e-card у застосунку — це канали залучення нових клієнтів у програму.</p>
-      </div>
-      <div class="aaarr-card k-2 reveal">
-        <div class="aaarr-letter">A</div>
-        <div class="aaarr-name">Активація</div>
-        <div class="aaarr-en">Activation</div>
-        <p>Перше осмислене використання: клієнт отримав картку, зробив покупку, побачив нарахування. Що швидше це станеться — то вища ймовірність другого приходу. Тут працюють зрозумілі правила нарахування й SMS про баланс.</p>
-      </div>
-      <div class="aaarr-card k-3 reveal">
-        <div class="aaarr-letter">R</div>
-        <div class="aaarr-name">Утримання</div>
-        <div class="aaarr-en">Retention</div>
-        <p>Найважливіше. Накопичені бонуси — це причина повернутися саме до нас, а не до конкурента. Що більше клієнт списує — то міцніша звичка. Розширені списки і програма для мам — інструменти саме на цьому етапі.</p>
-      </div>
-      <div class="aaarr-card k-4 reveal">
-        <div class="aaarr-letter">R</div>
-        <div class="aaarr-name">Рекомендації</div>
-        <div class="aaarr-en">Referral</div>
-        <p>Задоволений клієнт розповідає про програму родичам і колегам. Реферальна механіка («приведи друга») та позитивні відгуки в соцмережах підсилюють органічне залучення без витрат на рекламу.</p>
-      </div>
-      <div class="aaarr-card k-5 reveal">
-        <div class="aaarr-letter">R</div>
-        <div class="aaarr-name">Дохід</div>
-        <div class="aaarr-en">Revenue</div>
-        <p>Учасники програми мають вищий середній чек на 19.5% і повертаються частіше. Кожен наступний візит — це додатковий дохід без витрат на залучення нового клієнта.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="state">
-  <div class="section-number">02</div>
-  <div class="container">
-    <span class="eyebrow reveal">Поточний стан</span>
-    <h2 class="reveal">Як працює програма зараз</h2>
-    <p class="section-lede reveal">Ключові метрики за квітень 2026 (станом на 27 число).</p>
-
-    <div class="state-grid stagger">
-      <div class="state-card reveal accent">
-        <div class="state-label">Активні клієнти</div>
-        <span class="state-big" data-counter="1.74" data-suffix="M">0</span>
-        <div class="state-sub">унікальних користувачів картки за останні 30 днів</div>
-      </div>
-      <div class="state-card reveal">
-        <div class="state-label">Нараховано бонусів</div>
-        <span class="state-big" data-counter="14.4" data-prefix="₴" data-suffix="М">₴0М</span>
-        <div class="state-sub">за 27 днів квітня — 0.62% від виручки</div>
-      </div>
-      <div class="state-card reveal">
-        <div class="state-label">Списано бонусів</div>
-        <span class="state-big" data-counter="18.1" data-prefix="₴" data-suffix="М">₴0М</span>
-        <div class="state-sub">за 27 днів квітня — 0.78% від виручки</div>
-      </div>
-      <div class="state-card reveal">
-        <div class="state-label">Проникнення в чеки</div>
-        <span class="state-big" data-counter="50.1" data-suffix="%">0%</span>
-        <div class="state-sub">виручки приходить через клієнтів з картками лояльності</div>
-      </div>
-    </div>
-
-    <div class="state-paragraph reveal">
-      <p>На картки лояльності припадає <span class="highlight">50.1% усієї виручки мережі</span> — це <b>₴1.16 млрд за 27 днів квітня</b> (березень: ₴1.36 млрд при 50.7% проникнення). Активних клієнтів за останні 30 днів — <b>1.74 мільйона</b>.</p>
-      <p>Усього в системі видано <b>10.8 млн карток</b> за весь час існування програми, а накопичений на них бонусний баланс на руках у клієнтів — <b>₴306 млн</b>. Після оновлення правил 23 лютого цей баланс поступово зменшується: клієнти списують більше, ніж нараховуємо. У відсотках до валового прибутку мережі програма коштує близько <b>5%</b>.</p>
-    </div>
-
-    <h3 class="reveal" style="font-family: 'Unbounded'; font-size: clamp(28px, 3.5vw, 44px); margin-top: 80px; margin-bottom: 32px; letter-spacing: -0.02em;">Учасники програми приносять більше</h3>
-    <p class="section-lede reveal" style="margin-bottom: 40px;">Перевірили на даних березня й квітня: середній чек клієнта з карткою лояльності помітно вищий.</p>
-
-    <div class="avg-check stagger">
-      <div class="avg-check-card no-loy reveal">
-        <div class="ac-label">Середній чек без картки</div>
-        <div class="ac-value">₴298</div>
-        <div class="ac-meta">Розрахунок за квітень 2026: ₴1.15 млрд / 3.87 млн чеків.</div>
-      </div>
-      <div class="avg-check-card with-loy reveal">
-        <div class="ac-label">Середній чек з карткою</div>
-        <div class="ac-value">₴356</div>
-        <div class="ac-meta">Розрахунок за квітень 2026: ₴1.16 млрд / 3.26 млн чеків.</div>
-        <div class="ac-diff">+19.5% до чека без картки</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="feedback" class="cream">
-  <div class="section-number">03</div>
-  <div class="container">
-    <span class="eyebrow reveal">Що кажуть клієнти</span>
-    <h2 class="reveal tight">Динаміка негативних відгуків</h2>
-    <p class="section-lede reveal">Кількість негативних звернень саме по програмі лояльності за три місяці.</p>
-
-    <div class="feedback-grid">
-      <div class="feedback-bars">
-        <div class="fb-row reveal">
-          <div class="fb-month">Січень</div>
-          <div class="fb-bar-track"><div class="fb-bar-fill" style="width: 100%;"></div></div>
-          <div class="fb-value">2 339</div>
-        </div>
-        <div class="fb-row reveal">
-          <div class="fb-month">Лютий</div>
-          <div class="fb-bar-track"><div class="fb-bar-fill" style="width: 78%;"></div></div>
-          <div class="fb-value">1 836</div>
-        </div>
-        <div class="fb-row reveal">
-          <div class="fb-month">Березень</div>
-          <div class="fb-bar-track"><div class="fb-bar-fill green" style="width: 31%;"></div></div>
-          <div class="fb-value">729</div>
-        </div>
-      </div>
-
-      <div class="feedback-takeaway reveal">
-        <h3>−69% за два місяці</h3>
-        <p>Негативних відгуків саме по програмі лояльності стало втричі менше — з 2 339 у січні до 729 у березні.</p>
-        <p>Найбільше падіння припало на лютий-березень, після оновлення правил списання 23 лютого.</p>
-        <p>Клієнти краще розуміють, як працює нова механіка — нові правила приживаються, гарячі питання поступово знімаються.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="budget">
-  <div class="section-number">04</div>
-  <div class="container">
-    <span class="eyebrow reveal">Як це впливає на колег</span>
-    <h2 class="reveal wide">Бонуси перейшли в бюджет маркетингу</h2>
-    <p class="section-lede reveal">Це принципова зміна, яка усуває старі конфлікти між списанням бонусів і мотивацією команд.</p>
-
-    <div class="budget-card reveal">
-      <div class="budget-pretitle">Що це означає на практиці</div>
-      <h3>Мотивація фармацевтів і категорійних менеджерів більше не залежить від ціни товару після списання бонусів</h3>
-      <p>Раніше списання бонусів зменшувало фактичну ціну реалізації — і це тягло за собою зниження маржі, від якої розраховувалися премії. Зараз ця логіка змінилась: <b>бонусний бюджет винесено окремою статтею в маркетинг</b>, а мотивація команд рахується від <b>встановленої ціни реалізації</b>, незалежно від того, скільки бонусів клієнт списав.</p>
-      <p>Це зніме напруження навколо розширених списків: фармацевт не втрачає в премії, коли клієнт оплачує товар бонусами, а категорійний менеджер може спокійно вмикати товари в програму, не боячись просадити свій KPI.</p>
-
-      <div class="budget-points">
-        <div class="budget-point">
-          <h4>Для фармацевта</h4>
-          <p>Премія рахується від встановленої ціни — бонусне списання її не зменшує. Можна спокійно пропонувати клієнтам списувати накопичене.</p>
-        </div>
-        <div class="budget-point">
-          <h4>Для категорійного менеджера</h4>
-          <p>KPI по маржі категорії не страждає від програми лояльності. Включення товарів у списки — інструмент розвитку, а не загроза показникам.</p>
-        </div>
-        <div class="budget-point">
-          <h4>Для мережі</h4>
-          <p>Бонуси як інструмент маркетингу — прозоро бюджетуються, плануються й оцінюються за окремими метриками: утримання, повернення, частота візитів.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="lists" class="cream">
-  <div class="section-number">05</div>
-  <div class="container">
-    <span class="eyebrow reveal">Що оновлюємо</span>
-    <h2 class="reveal wide">Список товарів з підвищеним списанням</h2>
+    <span class="eyebrow reveal">Контекст і підхід</span>
+    <h2 class="reveal">Як ми відбирали товари</h2>
 
     <div class="context-card reveal">
       <div class="pretitle">Контекст</div>
       <h3>Список існує давно. Ми вже підготували оновлення.</h3>
-      <p>На сайті вже декілька років діє <a href="https://apteka911.ua/ua/shop/actions/spisok-preparativ-na-yaki-mozhna-povnistyu-spisuvati-bonusi-z-diskontnoyi-kartki-da21055" target="_blank" rel="noopener">сторінка зі списком препаратів, на які можна повністю списувати бонуси</a>. Це 50 SKU — переважно бренд SUNLIFE плюс декілька позицій Ультравірк.</p>
-      <p>За цей час асортимент мережі суттєво змінився: з'явились нові товари СТМ, помінялись частки за категоріями, з'явились товари з високим бек-маржинальним ефектом. Ми вже підготували масштабне розширення списку та логіку його структури.</p>
+      <p>На сайті вже декілька років діє <a href="https://apteka911.ua/ua/shop/actions/spisok-preparativ-na-yaki-mozhna-povnistyu-spisuvati-bonusi-z-diskontnoyi-kartki-da21055" target="_blank" rel="noopener">сторінка зі списком препаратів, на які можна повністю списувати бонуси</a>. Це 50 SKU — переважно бренд SUNLIFE плюс декілька позицій Ультравірк. За цей час асортимент мережі суттєво змінився, і ми вже підготували масштабне розширення.</p>
       <p>Список 100%-го рівня об'єднує дві логіки: <b>34 SKU зі списку, який підготувала команда програми лояльності</b> (СТМ і високомаржинальні товари за нашою методологією), і <b>113 SKU з переліку, який запропонувала комерція</b>. Разом — 147 нових позицій, додатково до 50 існуючих.</p>
     </div>
 
@@ -1367,38 +687,45 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
         <p>Окремо відібрали товари СТМ з нерегулярними продажами та значним залишком на складі. Для них — підвищене нарахування 10% замість стандартних 5%, щоб активувати попит.</p>
       </div>
     </div>
+  </div>
+</section>
 
-    <h3 class="reveal" style="font-family: 'Unbounded'; font-size: clamp(28px, 3.5vw, 44px); margin-bottom: 32px; margin-top: 80px; letter-spacing: -0.02em;">346 нових товарів у чотирьох рівнях</h3>
+<section id="tiers">
+  <div class="section-number">02</div>
+  <div class="container">
+    <span class="eyebrow reveal">Структура списку</span>
+    <h2 class="reveal">346 нових товарів у чотирьох рівнях</h2>
+    <p class="section-lede reveal">Кожен рівень відповідає різній економіці товару — від високомаржинальних СТМ до помірних знижок на масові препарати.</p>
 
     <div class="tiers stagger">
       <div class="tier reveal">
         <div class="tier-rate">100%</div>
         <div class="tier-count">147 нових товарів</div>
         <h3>Повністю за бонуси</h3>
-        <p>СТМ і високомаржинальні товари, де списання не б'є по прибутку. 34 SKU — наш список, 113 SKU — від комерції. Окремо діє існуючий список SUNLIFE з 50 позицій.</p>
+        <p>СТМ і високомаржинальні товари. 34 SKU — наш список, 113 SKU — від комерції. Окремо діє існуючий список SUNLIFE з 50 позицій.</p>
       </div>
       <div class="tier t-2 reveal">
         <div class="tier-rate">30%</div>
-        <div class="tier-count">92 товарів</div>
+        <div class="tier-count">92 товари</div>
         <h3>Третина ціни</h3>
         <p>Помітна знижка на ходові препарати. Стандартно тут списується ~5%, ми піднімаємо до 30% — щоб клієнт відчув реальну вигоду.</p>
       </div>
       <div class="tier t-3 reveal">
         <div class="tier-rate">15%</div>
-        <div class="tier-count">83 товарів</div>
+        <div class="tier-count">83 товари</div>
         <h3>Помірна знижка</h3>
-        <p>Товари з повною доходністю понад 30%, але стандартним списанням нижче 10%. Запасу маржі вистачає на +15%, але не на 30% — економіка інша, ніж у попереднього рівня.</p>
+        <p>Товари з повною доходністю понад 30%, але стандартним списанням нижче 10%. Запасу маржі вистачає на +15%, але не на 30%.</p>
       </div>
       <div class="tier t-4 reveal">
         <div class="tier-rate">+10%</div>
-        <div class="tier-count">24 товарів</div>
+        <div class="tier-count">24 товари</div>
         <h3>Більше нарахування</h3>
-        <p>Замість стандартних 5% нарахування — 10%. Це товари СТМ з нерегулярними продажами та значним залишком на складі — підвищене нарахування активує попит.</p>
+        <p>Замість стандартних 5% нарахування — 10%. Це товари СТМ з нерегулярними продажами та значним залишком на складі.</p>
       </div>
     </div>
 
-    <h3 class="reveal" style="font-family: 'Unbounded'; font-size: clamp(28px, 3.5vw, 44px); margin-bottom: 32px; margin-top: 80px; letter-spacing: -0.02em;">Як це побачить клієнт</h3>
-    <p class="section-lede reveal" style="margin-bottom: 56px;">На простому прикладі — Витамін D3 за ₴273.</p>
+    <h3 class="reveal" style="font-family: 'Unbounded'; font-size: clamp(26px, 3vw, 36px); margin-bottom: 24px; margin-top: 40px; letter-spacing: -0.02em;">Як це побачить клієнт</h3>
+    <p class="section-lede reveal" style="margin-bottom: 40px;">На простому прикладі — Витамін D3 за ₴273.</p>
 
     <div class="client-cards stagger">
       <div class="client-card reveal">
@@ -1430,12 +757,12 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
       </div>
     </div>
 
-    <p class="client-takeaway reveal" style="margin-bottom: 80px;">На товарах <em>100%-го рівня</em> клієнт оплачує лише символічну гривню — решту покривають бонуси.</p>
+    <p class="client-takeaway reveal">На товарах <em>100%-го рівня</em> клієнт оплачує лише символічну гривню — решту покривають бонуси.</p>
   </div>
 </section>
 
 <section class="dark" id="forecast">
-  <div class="section-number">06</div>
+  <div class="section-number">03</div>
   <div class="container">
     <span class="eyebrow reveal">Прогноз</span>
     <h2 class="reveal tight">Чого очікуємо</h2>
@@ -1458,7 +785,7 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
         <span class="forecast-big" data-counter="346">0</span>
         <div class="forecast-label">нових товарів</div>
         <div class="forecast-headline">У оновленому списку</div>
-        <div class="forecast-detail">У 7 разів більше товарів зі стимулом, ніж у поточному переліку.</div>
+        <div class="forecast-detail">У 7 разів більше товарів зі стимулом, ніж у поточному переліку з 50 позицій.</div>
       </div>
     </div>
 
@@ -1468,81 +795,19 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
   </div>
 </section>
 
-<section class="pink" id="mams">
-  <div class="section-number">07</div>
+<section id="download" class="cream">
+  <div class="section-number">04</div>
   <div class="container">
-    <span class="eyebrow reveal">Куди рухаємось далі</span>
-    <h2 class="reveal tight">Програма для мам та дітей</h2>
-    <p class="section-lede reveal">Окрема акція для категорії «мама-малюк». Стартує після оновлення списків.</p>
+    <span class="eyebrow reveal">Повний список</span>
+    <h2 class="reveal tight">Усі 234 SKU в одному PDF</h2>
+    <p class="section-lede reveal">Повний перелік товарів зі списку команди ПЛ — з артикулами, цінами, маржею, залишками й оборотністю — оформлений для зручного перегляду.</p>
 
-    <div class="mams-hero reveal">
-      <div class="mams-headline">
-        <span class="mams-percent">20%</span>
-        <span class="mams-text">кешбек<br>бонусами</span>
+    <div class="pdf-cta reveal">
+      <div class="pdf-cta-text">
+        <h3>Список товарів з підвищеним списанням</h3>
+        <p>PDF, 6 сторінок: 100% (34 SKU) · 30% (92 SKU) · 15% (83 SKU) · +10% нарахування (24 SKU). Кожен SKU з артикулом, повною економікою й залишком.</p>
       </div>
-      <p class="mams-sub">За кожну покупку товарів категорії «мама-малюк» — для всіх клієнтів, без винятків. Молоді мами — найлояльніша аудиторія, а жоден з конкурентів не має подібної програми.</p>
-    </div>
-
-    <div class="mams-features stagger">
-      <div class="mams-feature reveal">
-        <h4>Мета</h4>
-        <p>Закріпити звичку: мати приходить за товарами для дитини саме до нас. Категорія мама-малюк — поведінкова основа, навколо якої клієнт повертається роками.</p>
-      </div>
-      <div class="mams-feature f-2 reveal">
-        <h4>Механіка</h4>
-        <p>20% кешбеку щодня + 25% списання останнього вікенду місяця (замість стандартних ~6% по категорії). Перший місяць — тільки нарахування, з другого — старт списань.</p>
-      </div>
-      <div class="mams-feature f-3 reveal">
-        <h4>Прогноз</h4>
-        <p>+₴24М чистого прибутку за 3 місяці при додатковому тиску ~6.3% від валового прибутку мережі. Категорія росте з ₴47.5М до ~₴68М на місяць — за рахунок збільшеної частоти візитів і середнього чека.</p>
-      </div>
-    </div>
-
-    <div class="mams-bar reveal">
-      <span>За 3 місяці:</span>
-      <b>+₴24М прибутку</b>
-      <b>6.3% від валового прибутку мережі</b>
-      <b>0 конкурентів з подібною програмою</b>
-    </div>
-  </div>
-</section>
-
-<section id="summary">
-  <div class="section-number">08</div>
-  <div class="container">
-    <span class="eyebrow reveal">Підсумок</span>
-
-    <div class="summary-card reveal">
-      <ul class="summary-list">
-        <li>
-          <b>1</b>
-          <div>
-            <h4>Оновлюємо існуючий список 100% списання</h4>
-            <p>До 50 поточних SKU додаємо 147 нових — це наш список (34 SKU) плюс перелік від комерції (113 SKU). На цих товарах клієнт може заплатити ₴1 замість повної ціни.</p>
-          </div>
-        </li>
-        <li>
-          <b>2</b>
-          <div>
-            <h4>Розширюємо до 4 рівнів стимулу</h4>
-            <p>Окрім 100%, додаємо 30% (92 SKU), 15% (83 SKU) і підвищене нарахування 10% (24 SKU). Загалом — 346 нових товарів проти поточних 50.</p>
-          </div>
-        </li>
-        <li>
-          <b>3</b>
-          <div>
-            <h4>Запускаємо акцію для мам та дітей</h4>
-            <p>20% кешбек на категорію «мама-малюк» для всіх клієнтів. Жоден конкурент не має подібного. Прогноз +₴24М прибутку за 3 місяці.</p>
-          </div>
-        </li>
-        <li>
-          <b>4</b>
-          <div>
-            <h4>Моніторимо й коригуємо</h4>
-            <p>Перші 30-60 днів після ролауту збираємо реальні дані — обсяг списань, динаміку залишків, відгуки клієнтів. На основі цих даних приймаємо рішення про подальше розширення.</p>
-          </div>
-        </li>
-      </ul>
+      <a href="https://drive.google.com/file/d/1wv_gW4flKmO2RXAovLr4P6wl-ni9SRuq/view?usp=drive_link" class="btn btn-primary" target="_blank">Завантажити PDF</a>
     </div>
   </div>
 </section>
@@ -1559,7 +824,7 @@ footer .logo { justify-content: center; margin-bottom: 24px; }
 <path d="M12.4372 12.4018C15.6456 12.1545 17.0188 14.3542 16.1424 17.3225C16.0933 17.4889 15.835 18.229 15.7613 18.3122C15.682 18.4017 15.6686 18.3811 15.5695 18.3558C15.2335 18.2702 14.2003 17.481 13.9475 17.5562C13.0243 18.9057 11.9602 20.2099 10.5743 21.1093C6.522 23.7384 2.49269 21.8676 5.49902 16.9477C6.93245 14.6022 9.63846 12.6173 12.4372 12.4018Z" fill="#ED1A3B"/>
 <path d="M53.5492 18.245H56.9829V17.5532C56.9829 17.0663 56.7523 16.6563 56.3167 16.2976C55.8554 15.9388 55.3173 15.7595 54.6511 15.7595C54.0105 15.7595 53.4724 15.9388 53.0368 16.2463C52.6011 16.5794 52.3705 16.9894 52.3449 17.4507H49.3468C49.4493 16.1182 50.0387 14.9907 51.0637 14.1195C52.0886 13.2483 53.3699 12.8127 54.9073 12.8127C56.4448 12.8127 57.7004 13.2739 58.7254 14.1451C59.7503 15.0164 60.2628 16.1438 60.2628 17.4763V22.5243C60.2628 22.8062 60.3397 23.0368 60.5191 23.2162C60.6728 23.4212 60.9034 23.498 61.1597 23.498C61.3647 23.498 61.5697 23.4468 61.8003 23.293V25.548C61.2366 25.9067 60.5959 26.0861 59.8785 26.0861C58.6485 26.0861 57.7773 25.5992 57.2904 24.6255C56.291 25.6505 55.0098 26.163 53.4467 26.163C52.1143 26.163 51.0124 25.8042 50.1412 25.0355C49.27 24.2668 48.8344 23.293 48.8344 22.0631C48.8344 20.8843 49.2443 19.9619 50.0899 19.27C50.9356 18.6038 52.0886 18.245 53.5492 18.245ZM52.1143 21.9349C52.1143 22.3193 52.268 22.6268 52.6268 22.883C52.9599 23.1393 53.3955 23.2418 53.9592 23.2418C54.728 23.2418 55.4198 23.0112 56.0348 22.4987C56.6498 22.0118 56.9573 21.3968 56.9829 20.6537H54.1386C53.5236 20.6537 53.0368 20.7818 52.678 21.0125C52.2936 21.2431 52.1143 21.5506 52.1143 21.9349ZM63.9167 13.1202H75.8064V25.8555H72.5265V15.7082H67.1966V25.8555H63.9167V13.1202ZM89.6634 15.7082H85.4354V25.8555H82.1555V15.7082H77.9531V13.1202H89.6634V15.7082ZM97.3585 12.8127C99.0754 12.8127 100.485 13.3508 101.587 14.427C102.663 15.5032 103.227 16.8613 103.227 18.5013C103.227 19.1675 103.098 19.8594 102.842 20.5256H94.1299C94.3092 21.3712 94.6936 22.0374 95.3086 22.5243C95.8979 23.0368 96.6667 23.2674 97.5891 23.2674C98.3579 23.2674 98.9985 23.1137 99.511 22.7549C100.023 22.4218 100.305 21.9862 100.357 21.4737H103.278C103.15 22.8318 102.535 23.9336 101.407 24.8049C100.28 25.6761 98.896 26.1117 97.2816 26.1117C95.3598 26.1117 93.7967 25.4967 92.618 24.2411C91.4393 23.0112 90.8499 21.4225 90.8499 19.5006C90.8499 17.5532 91.4649 15.9645 92.6949 14.7089C93.9249 13.4533 95.4623 12.8127 97.3585 12.8127ZM94.258 18.0144H100.203C100.049 17.2969 99.7416 16.7332 99.2547 16.2976C98.7422 15.862 98.1273 15.6313 97.3841 15.6313C96.6154 15.6313 95.9748 15.862 95.4367 16.2719C94.873 16.7076 94.4886 17.2969 94.258 18.0144ZM105.88 13.1202H109.16V18.04H110.057C110.672 18.04 111.133 17.7838 111.441 17.2457L113.132 14.6576C113.747 13.5558 114.67 12.992 115.9 12.992H117.283V15.5801H117.181C116.515 15.5801 116.028 15.862 115.72 16.4001L113.85 19.2956L116.053 22.5755C116.361 23.1393 116.848 23.3955 117.514 23.3955H117.591V25.9836H116.31C115.72 25.9836 115.182 25.8555 114.67 25.548C114.157 25.2661 113.747 24.8561 113.465 24.3436L111.441 21.4481C111.082 20.91 110.621 20.6281 110.006 20.6281H109.16V25.8555H105.88V13.1202ZM124.016 18.245H127.45V17.5532C127.45 17.0663 127.219 16.6563 126.784 16.2976C126.322 15.9388 125.784 15.7595 125.118 15.7595C124.478 15.7595 123.939 15.9388 123.504 16.2463C123.068 16.5794 122.838 16.9894 122.812 17.4507H119.814C119.916 16.1182 120.506 14.9907 121.531 14.1195C122.556 13.2483 123.837 12.8127 125.374 12.8127C126.912 12.8127 128.167 13.2739 129.192 14.1451C130.217 15.0164 130.73 16.1438 130.73 17.4763V22.5243C130.73 22.8062 130.807 23.0368 130.986 23.2162C131.14 23.4212 131.37 23.498 131.627 23.498C131.832 23.498 132.037 23.4468 132.267 23.293V25.548C131.704 25.9067 131.063 26.0861 130.346 26.0861C129.116 26.0861 128.244 25.5992 127.757 24.6255C126.758 25.6505 125.477 26.163 123.914 26.163C122.581 26.163 121.479 25.8042 120.608 25.0355C119.737 24.2668 119.301 23.293 119.301 22.0631C119.301 20.8843 119.711 19.9619 120.557 19.27C121.403 18.6038 122.556 18.245 124.016 18.245ZM122.581 21.9349C122.581 22.3193 122.735 22.6268 123.094 22.883C123.427 23.1393 123.863 23.2418 124.426 23.2418C125.195 23.2418 125.887 23.0112 126.502 22.4987C127.117 22.0118 127.424 21.3968 127.45 20.6537H124.606C123.991 20.6537 123.504 20.7818 123.145 21.0125C122.761 21.2431 122.581 21.5506 122.581 21.9349Z" fill="black"/>
 </svg></span>
-    <span class="logo-text">Програма<br>лояльності</span>
+    <span class="logo-text">Підвищене<br>списання</span>
   </a>
   <p>Квітень 2026</p>
 </footer>
@@ -1580,30 +845,16 @@ function updateProgress() {
   lastScroll = scrolled;
 }
 
-const parallaxEls = document.querySelectorAll('[data-parallax]');
-function updateParallax() {
-  const scrolled = window.pageYOffset;
-  parallaxEls.forEach(el => {
-    const speed = parseFloat(el.dataset.parallax);
-    const offset = scrolled * speed;
-    el.style.transform = el.classList.contains('hero-logo')
-      ? `translateY(calc(-50% + ${offset}px)) rotate(${offset * 0.05}deg)`
-      : `translate3d(0, ${offset}px, 0)`;
-  });
-}
-
 let ticking = false;
 window.addEventListener('scroll', () => {
   if (!ticking) {
-    requestAnimationFrame(() => { updateProgress(); updateParallax(); ticking = false; });
+    requestAnimationFrame(() => { updateProgress(); ticking = false; });
     ticking = true;
   }
 }, { passive: true });
 
 const reveals = document.querySelectorAll('.reveal');
 const staggers = document.querySelectorAll('.stagger');
-const fbRows = document.querySelectorAll('.fb-row');
-
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1615,14 +866,11 @@ if ('IntersectionObserver' in window) {
   }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
   reveals.forEach(el => io.observe(el));
   staggers.forEach(el => io.observe(el));
-  fbRows.forEach(el => io.observe(el));
 } else {
   reveals.forEach(el => el.classList.add('in'));
   staggers.forEach(el => el.classList.add('in'));
-  fbRows.forEach(el => el.classList.add('in'));
 }
 
-// Counter animation
 const counters = document.querySelectorAll('[data-counter]');
 const counterIO = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -1633,14 +881,14 @@ const counterIO = new IntersectionObserver((entries) => {
       const suffix = el.dataset.suffix || '';
       const duration = 1800;
       const start = performance.now();
-      const decimals = (target % 1 === 0) ? 0 : (target.toString().includes('.') ? target.toString().split('.')[1].length : 1);
+      const decimals = (target % 1 === 0) ? 0 : 1;
       function tick(now) {
         const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
+        const p = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
         const current = target * eased;
         el.textContent = prefix + current.toFixed(decimals) + suffix;
-        if (progress < 1) requestAnimationFrame(tick);
+        if (p < 1) requestAnimationFrame(tick);
         else el.textContent = prefix + target.toFixed(decimals) + suffix;
       }
       requestAnimationFrame(tick);
@@ -1649,18 +897,6 @@ const counterIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 counters.forEach(el => counterIO.observe(el));
-
-// Cursor-follow hero logo
-const heroLogo = document.querySelector('.hero-logo');
-const hero = document.querySelector('.hero');
-if (heroLogo && hero && window.matchMedia('(min-width: 1280px)').matches) {
-  hero.addEventListener('mousemove', (e) => {
-    const rect = hero.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    heroLogo.style.transform = `translateY(-50%) translate(${x * 20}px, ${y * 16}px) rotate(${x * 5}deg)`;
-  });
-}
 </script>
 
 </body>
