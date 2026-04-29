@@ -497,7 +497,7 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
   -webkit-backdrop-filter: blur(20px) saturate(1.5);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 20px;
-  padding: 44px 32px;
+  padding: 44px 28px;
   position: relative;
   overflow: hidden;
   box-shadow: var(--liquid-glass-dark);
@@ -529,9 +529,11 @@ section.dark .section-number { color: rgba(255,255,255,0.05); }
 .forecast-card.fc-3::after { background: linear-gradient(90deg, var(--blue), #2e6a9e); }
 .forecast-big {
   font-family: 'Unbounded'; font-weight: 900;
-  font-size: clamp(44px, 5.5vw, 72px); line-height: 0.95;
+  font-size: clamp(38px, 4.6vw, 60px); line-height: 0.95;
   color: var(--amber); margin-bottom: 14px; letter-spacing: -0.04em;
   display: block;
+  word-break: break-word;
+  hyphens: none;
 }
 .forecast-card.fc-2 .forecast-big { color: #5fce8b; }
 .forecast-card.fc-3 .forecast-big { color: #6cb3e0; }
